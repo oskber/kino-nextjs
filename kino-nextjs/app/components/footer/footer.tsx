@@ -1,44 +1,43 @@
 import Link from 'next/link';
 export default function Footer() {
-  type AboutList = {
-    phone: string;
-    adress: string;
-    mail: string;
-  };
-  type SocialMedia = [
-    { href: string; name: string },
-    { href: string; name: string },
-    { href: string; name: string }
-  ];
-  const aboutList: AboutList = {
-    phone: '073123432',
-    adress: 'Bihjografengatan 12',
-    mail: 'Bihjografen@spray.se',
-  };
+  type AboutFooterList = { phone?: string; info?: string };
+  type FooterMediaList = { href: string; name: string };
 
-  const socialMediaLinks: SocialMedia = [
+  const aboutList: AboutFooterList[] = [
+    { phone: '073123432' },
+    { info: 'Bihjografengatan 12' },
+    { info: 'Bihjografen@spray.se' },
+  ];
+
+  const socialMediaLinks: FooterMediaList[] = [
     { href: 'https://www.facebook.com', name: 'Facebook' },
     { href: 'https://twitter.com', name: 'Twitter/X' },
     { href: 'https://www.tiktok.com', name: 'TikTok' },
   ];
   return (
-    <footer className='w-full flex justify-center'>
-      <nav className='flex flex-row justify-between dark:bg-custom_red w-10/12 rounded-xl'>
-        <div>
+    <footer className='w-full flex justify-center mt-2 mb-2'>
+      <nav className='flex flex-row justify-between dark:bg-custom_red w-10/12 rounded-xl p-2'>
+        <div className='ml-3'>
           <strong>Kontakta oss</strong>
           <ul>
-            <li>{aboutList.phone}</li>
-            <li>{aboutList.adress}</li>
-            <li>{aboutList.mail}</li>
+            {aboutList.map((info, index) => (
+              <li key={index}>
+                {info.phone ? (
+                  <a href={`tel:${info.phone}`}>{info.phone}</a>
+                ) : (
+                  <span>{info.info}</span>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
 
-        <div className='text-yellow-400'>
+        <div className='text-yellow-400 mr-3'>
           <strong>Följ oss!</strong>
           <ul className=''>
             {socialMediaLinks.map((links, index) => (
-              <li key={index}>
-                <Link href={links.href}>{links.name}</Link>
+              <li key={index} className='hover:bg-black rounded-xl'>
+                <a href={links.href}>{links.name}</a>
               </li>
             ))}
           </ul>
