@@ -3,6 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Logo from './bihjografenlogo.png';
 
+const links = [
+  { href: '/', name: 'Hem' },
+  { href: '/about', name: 'Om oss' },
+  { href: '/login', name: 'Logga in' },
+  { href: '/create-account', name: 'Skapa konto' },
+];
+
 const NavBar = () => {
   return (
     <nav className="flex justify-center top-5 sticky">
@@ -47,35 +54,15 @@ const NavBar = () => {
             className="hidden w-full md:block md:w-auto mr-auto ml-auto pr-12"
             id="navbar-solid-bg">
             <ul className="flex flex-col font-medium mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-red-800 md:dark:bg-transparent">
-              <li>
-                <Link
-                  href="/"
-                  className="block py-2 px-3 md:p-0 text-white bg-yellow-700 rounded md:bg-transparent md:text-yellow-700 md:dark:text-yellow-500 dark:bg-yellow-600 md:dark:bg-transparent"
-                  aria-current="page">
-                  Hem
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="block py-2 px-3 md:p-0 text-yellow-900 rounded hover:bg-yellow-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-yellow-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                  Om oss
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/login"
-                  className="block py-2 px-3 md:p-0 text-yellow-900 rounded hover:bg-yellow-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-yellow-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                  Logga in
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/create-account"
-                  className="block py-2 px-3 md:p-0 text-yellow-900 rounded hover:bg-yellow-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-yellow-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                  Skapa konto
-                </Link>
-              </li>
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="block py-2 px-3 md:p-0 text-yellow-900 rounded hover:bg-yellow-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 dark:text-white md:dark:hover:text-yellow-500 dark:hover:bg-yellow-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
