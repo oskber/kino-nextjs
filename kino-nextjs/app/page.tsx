@@ -1,8 +1,8 @@
 export default function Home() {
   return (
     <>
-      <div className="container mx-auto px-4 mt-10">
-        <div className="w-full h-screen bg-custom_yellow">
+      <div className='container mx-auto px-4 mt-10'>
+        <div className='w-full h-screen bg-custom_yellow'>
           <h1>Hello world</h1>
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis
