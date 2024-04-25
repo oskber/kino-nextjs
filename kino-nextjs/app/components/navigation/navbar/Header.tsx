@@ -3,7 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Logo from './bihjografenlogo.png';
 
-const links = [
+type Link = {
+  href: string;
+  name: string;
+};
+
+const links: Link[] = [
   { href: '/', name: 'Hem' },
   { href: '/about', name: 'Om oss' },
   { href: '/login', name: 'Logga in' },
