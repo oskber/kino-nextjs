@@ -15,7 +15,7 @@ export default function Footer() {
     { href: 'https://www.tiktok.com', name: 'TikTok' },
   ];
   return (
-    <footer className='w-full flex justify-center mt-2 mb-2'>
+    <footer className='w-full flex justify-center mt-2 mb-2 text-white'>
       <nav className='flex flex-row justify-between bg-custom_red w-10/12 rounded-xl p-2'>
         <div className='ml-3'>
           <strong>Kontakta oss</strong>
@@ -32,11 +32,11 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className='text-yellow-400 mr-3'>
+        <div className='mr-3'>
           <strong>Följ oss!</strong>
           <ul className=''>
             {socialMediaLinks.map((links, index) => (
-              <li key={index} className='hover:bg-black rounded-xl'>
+              <li key={index} className='hover:text-custom_yellow rounded-xl'>
                 <a href={links.href}>{links.name}</a>
               </li>
             ))}
