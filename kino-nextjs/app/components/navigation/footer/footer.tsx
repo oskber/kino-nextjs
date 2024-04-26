@@ -16,7 +16,7 @@ export default function Footer() {
   ];
   return (
     <footer className='w-full flex justify-center mt-2 mb-2'>
-      <nav className='flex flex-row justify-between dark:bg-custom_red w-10/12 rounded-xl p-2'>
+      <nav className='flex flex-row justify-between bg-custom_red w-10/12 rounded-xl p-2'>
         <div className='ml-3'>
           <strong>Kontakta oss</strong>
           <ul>
