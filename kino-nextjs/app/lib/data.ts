@@ -15,21 +15,6 @@ export function fetchMovie(id: string) {
   return movies.find((movie) => movie.ID === movieID);
 }
 
-const movieSchema = new mongoose.Schema({
-  Title: String,
-  Released: Boolean,
-  Screenings: Array,
-  Genre: String,
-  Rating: Number,
-  imdbRating: String,
-  Description: String,
-  Poster: String,
-});
-
-const Movie = mongoose.models.Movie || mongoose.model('Movie', movieSchema);
-
-mongoose.connect();
-
 export async function fetchComingMovies() {
   try {
     const Comingmovies: Movies[] = await Movie.find({ Released: false });
