@@ -3,7 +3,6 @@ import { Movies } from './types';
 import { Movie } from './schema';
 import mongoose from 'mongoose';
 import 'dotenv/config';
-
 //Here we will fetch all the different data from database when it is set up
 
 mongoose.connect(process.env.DB_URL).catch((error) => {
