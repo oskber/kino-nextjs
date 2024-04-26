@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from './bihjografenlogo.png';
@@ -16,6 +18,11 @@ const links: Link[] = [
 ];
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <nav className="flex justify-center top-5 sticky">
       <div className="bg-custom_red w-10/12 rounded-xl">
@@ -34,11 +41,11 @@ const NavBar = () => {
             </Link>
           </div>
           <button
-            data-collapse-toggle="navbar-solid-bg"
+            onClick={handleClick}
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-yellow-500 rounded-lg md:hidden hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200  "
             aria-controls="navbar-solid-bg"
-            aria-expanded="false">
+            aria-expanded={isOpen}>
             <span className="sr-only">Öppna meny</span>
             <svg
               className="w-5 h-5"
@@ -56,14 +63,17 @@ const NavBar = () => {
             </svg>
           </button>
           <div
-            className="hidden w-full md:block md:w-auto mr-auto ml-auto"
+            className={`${
+              isOpen ? 'block' : 'hidden'
+            } w-full md:block md:w-auto mr-auto ml-auto text-center`}
             id="navbar-solid-bg">
             <ul className="flex flex-col font-medium mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
               {links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block py-2 px-3 md:p-0 rounded hover:bg-yellow-100 focus:bg-yellow-100 md:hover:bg-transparent md:focus:bg-transparent md:border-0 md:hover:text-yellow-500 md:focus:text-yellow-500 text-white ">
+                    onClick={handleClick}
+                    className="block py-2 px-3 md:p-0 rounded hover:bg-custom_yellow focus:bg-custom_yellow md:hover:bg-transparent md:focus:bg-transparent md:border-0 md:hover:text-custom_yellow md:focus:text-custom_yellow text-white ">
                     {link.name}
                   </Link>
                 </li>
