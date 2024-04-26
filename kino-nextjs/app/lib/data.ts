@@ -30,5 +30,6 @@ export async function fetchComingMovies() {
     return Comingmovies;
   } catch (error) {
     console.error('Error fetching movies:', error);
+    return [];
   }
 }

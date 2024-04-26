@@ -10,7 +10,7 @@ export default async function ComingMovies() {
         <h2 className=''> Kommande filmer</h2>
       </div>
       <div className='flex flex-nowrap space-x-4 py-4 px-2 md:px-0 justify-center'>
-        {comingMovies?.map((movie) => (
+        {comingMovies.map((movie) => (
           <div key={movie._id} className='flex-shrink-0 w-64 max-w-xs'>
             <img
               src={movie.Poster}
