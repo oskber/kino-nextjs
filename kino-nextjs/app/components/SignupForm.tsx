@@ -43,6 +43,6 @@ export default function SignupForm() {
 const Button = () => {
     const { pending } = useFormStatus();
     return (
-        <button className="bg-custom_red px-2 py-1 mt-2 text-white text-xl font-semibold rounded-md hover:opacity-80" type="submit" disabled={pending} aria-disabled={pending}>Logga in</button>
+        <button className="bg-custom_red px-2 py-1 mt-2 text-white text-xl font-semibold rounded-md hover:opacity-80" type="submit" disabled={pending} aria-disabled={pending}>Skapa konto</button>
     )
 }
