@@ -8,7 +8,7 @@ export default async function ComingMovies() {
   return (
     <section className=' text-white mt-3'>
       <div className='flex justify-center text-3xl'>
-        <h2 className=''> Kommande filmer</h2>
+        <h2 className='text-custom_yellow'> Kommande filmer</h2>
       </div>
       <div className='overflow-x-auto flex flex-nowrap space-x-4 py-4 px-2 md:px-0 justify-center'>
         {comingMovies.map((movie) => (
