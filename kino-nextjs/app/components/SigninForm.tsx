@@ -5,7 +5,6 @@ import { authenticate } from '../lib/actions';
 
 export default function SigninForm() {
     const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-    const { pending } = useFormStatus();
     return (
         <>
             <form action={dispatch} className="flex flex-col gap-2">
