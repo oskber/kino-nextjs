@@ -7,7 +7,7 @@ const links = [
   { href: '/', name: 'Hem' },
   { href: '/about', name: 'Om oss' },
   { href: '/login', name: 'Logga in' },
-  { href: '/create-account', name: 'Skapa konto' },
+  { href: '/register', name: 'Skapa konto' },
 ];
 
 const NavBar = () => {
