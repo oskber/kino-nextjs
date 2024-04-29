@@ -6,11 +6,11 @@ export default async function ComingMovies() {
   const comingMovies = await fetchComingMovies();
 
   return (
-    <section className=' text-white mt-3 '>
+    <section className=' text-white mt-3 w-screen'>
       <div className='flex justify-center text-3xl'>
         <h2 className='text-custom_yellow font-bold'> Kommande filmer</h2>
       </div>
-      <div className=' flex flex-nowrap gap-5 py-4 px-2 sm:px-0 justify-center overflow-x-auto'>
+      <div className=' flex flex-nowrap gap-5 py-4 px-2 justify-start overflow-x-auto 2xl:justify-center'>
         {comingMovies.map((movie) => (
           <div key={movie._id} className='flex-shrink-0 w-64 max-w-xs '>
             <img
