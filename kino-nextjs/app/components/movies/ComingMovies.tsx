@@ -1,32 +1,29 @@
 import { fetchComingMovies } from '../../lib/data';
+import MovieButton from './MovieButton';
 import Image from 'next/image';
 import Link from 'next/link';
+
 
 export default async function ComingMovies() {
   const comingMovies = await fetchComingMovies();
 
   return (
-    <section className=' text-white mt-3 w-screen'>
-      <div className='flex justify-center text-3xl'>
-        <h2 className='text-custom_yellow font-bold'> Kommande filmer</h2>
-      </div>
-      <div className=' flex flex-nowrap gap-5 py-4 px-2 justify-start overflow-x-auto 2xl:justify-center'>
+    <section className=' text-white grid max-w-7xl mr-8 ml-8'>
+        <h2 className='col-start-1 mb-4 text-xl font-bold text-custom_yellow'> Kommande filmer</h2>
+      <div className='flex flex-nowrap justify-start lg:grid max-lg:overflow-x-auto max-lg:whitespace-nowrap lg:grid-cols-5 lg:row-start-2 lg:col-start-1 lg:col-span-6 gap-4'>
         {comingMovies.map((movie) => (
-          <div key={movie._id} className='flex-shrink-0 w-64 max-w-xs '>
+          <div key={movie._id} className='flex flex-col flex-shrink-0 max-w-56 justify-between bg-gray-800 bg-opacity-70 rounded-md'>
+            <div>
             <img
               src={movie.Poster}
               alt='Movie image'
-              className='w-full h-96 object-cover'
+              className='object-cover lg:max-h-80 w-full rounded-t-md'
             />
-            <div className='mt-4 flex flex-col'>
-              <h1 className='text-xl font-bold'>{movie.Title}</h1>
-              <span className=''>{movie.Genre}</span>
-              <Link
-                href={`http://localhost:3000/${movie._id}`}
-                className='bg-custom_yellow w-20 text-center rounded-sm'
-              >
-                Boka
-              </Link>
+            <h2 className='ml-3 mr-3 mt-2 text-[1rem] font-bold text-wrap text-white'>{movie.Title}</h2>
+            </div>
+            <div className='p-3 flex flex-col text-wrap'>
+              <span>{movie.Genre}</span>
+            <MovieButton movieId={movie._id} />
             </div>
           </div>
         ))}

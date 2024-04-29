@@ -6,7 +6,7 @@ export default async function Movie({ id }: { id: string }) {
 
   return (
     <>
-      <main className='mt-20 grid justify-center'>
+      <main className='mt-20 grid justify-center text-white'>
         <section className='grid grid-cols-6 grid-rows-2 align-middle items-center justify-center max-w-7xl'>
           <img
             className='col-start-2 col-span-4 row-start-1 self-start  sm:col-start-4 sm:col-span-2 justify-self-stretch'
@@ -20,8 +20,8 @@ export default async function Movie({ id }: { id: string }) {
               {movie?.imdbRating}
             </p>
             <p className='mb-3 text-lg font-bold text-custom_yellow'>
-              Kategori:{' '}
-              <span className='font-normal text-white'>{movie?.Genre}</span>
+              Kategori: 
+              <span className='font-normal text-white'>{` ${movie?.Genre}`}</span>
             </p>
             <p className='sm:text-lg'>{movie?.Description}</p>
           </div>
