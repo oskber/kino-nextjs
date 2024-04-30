@@ -1,11 +1,11 @@
-import AllMovies from '../components/movies/AllMovies';
+import MoviesNow from '../components/movies/MoviesNow';
 import ComingMovies from '../components/movies/ComingMovies';
 
 export default function Page() {
   return (
-    <>
-      <AllMovies />
+    <main className="mt-20 grid justify-center">
+      <MoviesNow />
       <ComingMovies />
-    </>
+    </main>
   );
 }
