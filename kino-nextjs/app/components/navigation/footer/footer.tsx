@@ -15,6 +15,7 @@ export default function Footer() {
     { href: 'https://www.tiktok.com', name: 'TikTok' },
   ];
   return (
+
     <footer className='w-full flex justify-center text-white text-xs mt-2 mb-2 sm:w-full sm:justify-center sm:mt-2 sm:mb-2 sm:text-base'>
       <nav className='flex flex-row justify-between bg-custom_red w-10/12 rounded-xl p-2'>
         <div className='ml-3'>
