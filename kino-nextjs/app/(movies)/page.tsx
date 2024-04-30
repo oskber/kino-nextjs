@@ -4,8 +4,8 @@ import ComingMovies from '../components/movies/ComingMovies';
 export default function Page() {
   return (
     <main className="mt-20 grid justify-center">
-      <ComingMovies />
       <MoviesNow />
+      <ComingMovies />
     </main>
   );
 }

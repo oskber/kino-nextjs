@@ -8,7 +8,7 @@ export default async function ComingMovies() {
   const comingMovies = await fetchComingMovies();
 
   return (
-    <section className=' text-white grid max-w-7xl mr-8 ml-8'>
+    <section className=' text-white grid max-w-7xl mr-8 ml-8 mb-10 mt-10'>
         <h2 className='col-start-1 mb-4 text-xl font-bold text-custom_yellow'> Kommande filmer</h2>
       <div className='flex flex-nowrap justify-start lg:grid max-lg:overflow-x-auto max-lg:whitespace-nowrap lg:grid-cols-5 lg:row-start-2 lg:col-start-1 lg:col-span-6 gap-4'>
         {comingMovies.map((movie) => (
