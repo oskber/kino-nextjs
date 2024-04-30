@@ -1,7 +1,9 @@
 
+
 import { Tmovie, Movies } from './types';
 import { Movie } from './schema';
 import mongoose from 'mongoose';
+
 //Here we will fetch all the different data from database when it is set up
 
 const URL: string = process.env.DB_URL ?? '';
@@ -37,3 +39,4 @@ export async function fetchComingMovies() {
     return [];
   }
 }
+
