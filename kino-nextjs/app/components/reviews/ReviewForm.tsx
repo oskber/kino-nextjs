@@ -19,21 +19,21 @@ export default function ReviewForm() {
           await addReview(formData, movieId, rating);
         }}
         className="flex flex-col mb-5 mt-5">
-        <h1 className="text-custom_yellow text-center mb-2 font-bold">
-          Lämna en recension!
+        <h1 className="text-custom_yellow  mb-2 font-bold">
+          Vad tyckte du om filmen?
         </h1>
         <input
           type="text"
           name="name"
           className="px-4 py-2 mb-3 rounded text-black"
-          placeholder="Skriv ditt namn här"
+          placeholder="Namn..."
           required
         />
         <input
           type="text"
           name="comment"
           className="px-4 py-2 mb-3 rounded text-black"
-          placeholder="Skriv din recension här"
+          placeholder="Kommentar..."
           required
         />
         <StarRating onRatingChange={setRating} />
