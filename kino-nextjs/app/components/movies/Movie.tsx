@@ -1,7 +1,5 @@
 import { fetchMovie } from '../../lib/data';
 import { StarIcon } from '@heroicons/react/20/solid';
-import ReviewForm from '../reviews/ReviewForm';
-import ReviewsList from '../reviews/ReviewsList';
 
 export default async function Movie({ id }: { id: string }) {
   const movie = await fetchMovie(id);
@@ -26,10 +24,6 @@ export default async function Movie({ id }: { id: string }) {
               <span className="font-normal text-white">{` ${movie?.Genre}`}</span>
             </p>
             <p className="sm:text-lg">{movie?.Description}</p>
-          </div>
-          <div className=" row-start-2 col-start-3 col-span-2">
-            <ReviewForm />
-            <ReviewsList />
           </div>
         </section>
       </main>
