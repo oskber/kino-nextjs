@@ -5,7 +5,7 @@ export default function Button() {
   const { pending } = useFormStatus();
 
   return (
-    <button className="bg-custom_yellow rounded px-4 py-2 mt-3">
+    <button className="bg-custom_yellow text-white rounded px-4 py-2 mt-3">
       {pending ? 'Skickar...' : 'Skicka'}
     </button>
   );

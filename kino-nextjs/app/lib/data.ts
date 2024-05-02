@@ -40,9 +40,9 @@ export async function fetchComingMovies() {
   }
 }
 
-export async function fetchReviews() {
+export async function fetchReviews(id: string) {
   try {
-    const reviews = await Review.find();
+    const reviews = await Review.find({ movieId: id });
     return reviews;
   } catch (error) {
     throw new Error('Failed to fetch reviews');

@@ -1,17 +1,18 @@
 import { fetchReviews } from '../../lib/data';
 
-export default async function ReviewsList() {
-  const reviews = await fetchReviews();
+export default async function ReviewsList({ id }: { id: string }) {
+  const reviews = await fetchReviews(id);
+
   return (
     <>
-      <div className="flex flex-col bg-custom_red">
+      <div className="flex flex-col border rounded">
         <ul>
           {reviews.map((review) => (
             <li
-              className="text-white flex justify-between gap-1 border border-custom_yellow p-2 rounded"
+              className="text-white flex justify-between gap-1  border-b-2 p-2 rounded"
               key={review._id}>
               <div className=" flex-col">
-                <h3>Namn: {review.name}</h3>
+                <h3 className="font-bold">{review.name}</h3>
                 <p>{review.comment}</p>
               </div>
               <p>Betyg: {review.rating}</p>
