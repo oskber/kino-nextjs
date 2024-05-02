@@ -10,7 +10,7 @@ export default function Error({
     reset: () => void;
 }) {
     return (
-        <main className="mt-20 grid justify-center min-h-screen">
+        <main className="mt-20 grid justify-center min-h-screen text-white">
             <section className="flex flex-col items-center">
                 <h2 className="text-center font-bold">Något gick fel.</h2>
                 <button
