@@ -20,7 +20,7 @@ export default async function Movie({ id }: { id: string }) {
               {movie?.imdbRating}
             </p>
             <p className='mb-3 text-lg font-bold text-custom_yellow'>
-              Kategori: 
+              Kategori:
               <span className='font-normal text-white'>{` ${movie?.Genre}`}</span>
             </p>
             <p className='sm:text-lg'>{movie?.Description}</p>
