@@ -1,7 +1,7 @@
 
 
 import { Tmovie, Movies } from './types';
-import { Movie } from './schema';
+import { Movie, Review } from './schema';
 import mongoose from 'mongoose';
 
 //Here we will fetch all the different data from database when it is set up
@@ -40,3 +40,11 @@ export async function fetchComingMovies() {
   }
 }
 
+export async function fetchReviews() {
+  try {
+    const reviews = await Review.find();
+    return reviews;
+  } catch (error) {
+    throw new Error('Failed to fetch reviews');
+  }
+}

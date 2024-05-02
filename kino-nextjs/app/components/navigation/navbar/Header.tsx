@@ -26,7 +26,7 @@ const NavBar = () => {
   return (
     <nav className="flex justify-center top-5 sticky">
       <div className="bg-custom_red w-10/12 rounded-xl">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-2">
+        <div className="flex flex-wrap items-center justify-between p-2">
           <div className="relative">
             <Link href="/">
               <Image
