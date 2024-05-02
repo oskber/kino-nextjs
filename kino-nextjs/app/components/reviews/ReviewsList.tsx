@@ -5,11 +5,11 @@ export default async function ReviewsList({ id }: { id: string }) {
 
   return (
     <>
-      <div className="flex flex-col border rounded">
+      <div className="flex flex-col rounded">
         <ul>
           {reviews.map((review) => (
             <li
-              className="text-white flex justify-between gap-1  border-b-2 p-2 rounded"
+              className="text-white flex justify-between gap-1  border-b-2 p-2"
               key={review._id}>
               <div className=" flex-col">
                 <h3 className="font-bold">{review.name}</h3>
