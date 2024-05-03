@@ -10,11 +10,11 @@ export default async function ReviewsList({ id }: { id: string }) {
         <ul>
           {reviews.map((review) => (
             <li
-              className="text-white flex justify-between gap-1 border-b-2 border-custom_yellow p-2"
+              className="text-white flex justify-between gap-1 border-b-2 border-custom_yellow p-2 break-all"
               key={review._id}>
-              <div className=" flex-col">
+              <div className="flex-1">
                 <h3 className="font-bold">{review.name}</h3>
-                <p>{review.comment}</p>
+                <p className="pr-10">{review.comment}</p>
               </div>
               <p className="pt-2">
                 {Array.from({ length: review.rating }).map((_, i) => (
