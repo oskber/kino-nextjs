@@ -1,5 +1,3 @@
-
-
 import { Tmovie, Movies } from './types';
 import { Movie } from './schema';
 import mongoose from 'mongoose';
@@ -9,14 +7,22 @@ import mongoose from 'mongoose';
 const URL: string = process.env.DB_URL ?? '';
 
 mongoose.connect(URL).catch((error) => {
-    throw new Error(error);
+  throw new Error(error);
 });
 
-export default async function fetchMoviesNow() {
-  try{
-    const movies: Movies = await Movie.find({ Released: true });
+export default async function fetchMoviesNow(query: string) {
+  try {
+    const movies: Movies = await Movie.find({
+      Released: true,
+      $or: [
+        { Title: { $regex: query, $options: 'i' } },
+        { Description: { $regex: query, $options: 'i' } },
+        { Genre: { $regex: query, $options: 'i' } },
+      ],
+    }).exec();
+
     return movies;
-  }catch{
+  } catch {
     throw new Error('Failed to fetch current movies.');
   }
 }
@@ -39,4 +45,3 @@ export async function fetchComingMovies() {
     return [];
   }
 }
-

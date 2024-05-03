@@ -1,18 +1,15 @@
 import SearchMovies from '../navigation/SearchBar/Search';
 import fetchMoviesNow from '../../lib/data';
 import MovieButton from './MovieButton';
-import { ChangeEventHandler } from 'react';
-import { ChangeEvent } from 'react';
-import { useState } from 'react';
 
-export default async function MoviesNow() {
-  const movies = await fetchMoviesNow();
+export default async function MoviesNow({ query }: { query: string }) {
+  const movies = await fetchMoviesNow(query);
 
   // const movie = movies.filter((movies) => movies.Title === 'King Kong');
   return (
     <>
+      <SearchMovies />
       <section className='text-white grid max-w-7xl mr-8 ml-8'>
-        <SearchMovies />
         <h2 className='col-start-1 mb-4 text-xl font-bold text-custom_yellow'>
           På bio nu
         </h2>
