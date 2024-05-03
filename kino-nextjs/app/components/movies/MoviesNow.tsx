@@ -5,7 +5,6 @@ import MovieButton from './MovieButton';
 export default async function MoviesNow({ query }: { query: string }) {
   const movies = await fetchMoviesNow(query);
 
-  // const movie = movies.filter((movies) => movies.Title === 'King Kong');
   return (
     <>
       <SearchMovies />
