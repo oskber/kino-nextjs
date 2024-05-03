@@ -22,12 +22,12 @@ const PaginationControls: FC<PaginationControlsProps> = ({
   return (
     <div className="flex gap-1 justify-center mt-2">
       <button
-        className={`p-1 pr-2 pl-2 rounded cursor-pointer hover:opacity-70 ${
+        className="p-1 pr-2 pl-2 rounded cursor-pointer hover:opacity-70 bg-custom_yellow text-white"
+        /* className={`p-1 pr-2 pl-2 rounded cursor-pointer hover:opacity-70 ${
           !hasNextPage ? 'bg-custom_yellow text-white' : 'bg-gray-500'
-        }`}
-        disabled={!hasPrevPage}
+        }`} */
+        //disabled={!hasPrevPage}
         onClick={() => {
-          console.log('clicked framåt');
           router.push(
             `${pathname}?page=${Number(page) - 1}&per_page=${itemsPerPage}`,
             { scroll: false }
@@ -41,12 +41,12 @@ const PaginationControls: FC<PaginationControlsProps> = ({
       </div>
 
       <button
-        className={`p-1 pr-2 pl-2 rounded cursor-pointer hover:opacity-70 ${
+        className="p-1 pr-2 pl-2 rounded cursor-pointer hover:opacity-70 bg-custom_yellow text-white"
+        /* className={`p-1 pr-2 pl-2 rounded cursor-pointer hover:opacity-70 ${
           !hasNextPage ? 'bg-gray-500' : 'bg-custom_yellow text-white'
-        }`}
-        disabled={!hasNextPage}
+        }`} */
+        //disabled={!hasNextPage}
         onClick={() => {
-          console.log('clicked framåt');
           router.push(
             `${pathname}?page=${Number(page) + 1}&per_page=${itemsPerPage}`,
             { scroll: false }

@@ -42,12 +42,13 @@ export async function fetchComingMovies() {
 
 export async function fetchReviews(id: string, page: number, itemsPerPage: number) {
   try {
+    const totalReviews = await Review.countDocuments({ movieId: id });
     const reviews = await Review
     .find({ movieId: id })
     .skip((page - 1) * itemsPerPage)
     .limit(itemsPerPage || 5);
 
-    return reviews;
+    return {reviews, totalReviews};
   } catch (error) {
     throw new Error('Failed to fetch reviews');
   }

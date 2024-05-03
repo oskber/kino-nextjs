@@ -15,7 +15,9 @@ export default async function ReviewsList({
 }: ReviewsListProps) {
   const page = Number(searchParams['page']) ?? 1;
   const itemsPerPage = Number(searchParams['per_page']) ?? 5;
-  const reviews = await fetchReviews(id, page, itemsPerPage);
+  const { reviews, totalReviews } = await fetchReviews(id, page, itemsPerPage);
+
+  const totalPages = Math.ceil(totalReviews / itemsPerPage);
 
   return (
     <>
@@ -40,10 +42,7 @@ export default async function ReviewsList({
             </li>
           ))}
         </ul>
-        <PaginationControls
-          hasNextPage={reviews.length === 5}
-          hasPrevPage={Number(page) > 1}
-        />
+        <PaginationControls />
       </div>
     </>
   );
