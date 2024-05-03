@@ -1,8 +1,21 @@
 import { StarIcon } from '@heroicons/react/20/solid';
 import { fetchReviews } from '../../lib/data';
+import PaginationControls from './PaginationControls';
 
-export default async function ReviewsList({ id }: { id: string }) {
-  const reviews = await fetchReviews(id);
+interface ReviewsListProps {
+  id: string;
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+export default async function ReviewsList({
+  id,
+  searchParams,
+}: ReviewsListProps) {
+  const page = Number(searchParams['page']) ?? 1;
+  const itemsPerPage = Number(searchParams['per_page']) ?? 5;
+  const reviews = await fetchReviews(id, page, itemsPerPage);
 
   return (
     <>
@@ -27,6 +40,10 @@ export default async function ReviewsList({ id }: { id: string }) {
             </li>
           ))}
         </ul>
+        <PaginationControls
+          hasNextPage={reviews.length === 5}
+          hasPrevPage={Number(page) > 1}
+        />
       </div>
     </>
   );
