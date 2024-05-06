@@ -1,11 +1,15 @@
-import { StarIcon } from '@heroicons/react/20/solid';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  StarIcon,
+} from '@heroicons/react/20/solid';
 import { fetchReviews } from '../../lib/data';
-import PaginationControls from './PaginationControls';
+import Link from 'next/link';
 
 interface ReviewsListProps {
   id: string;
-  searchParams: {
-    [key: string]: string | string[] | undefined;
+  searchParams?: {
+    page?: string;
   };
 }
 
@@ -13,11 +17,25 @@ export default async function ReviewsList({
   id,
   searchParams,
 }: ReviewsListProps) {
-  const page = Number(searchParams['page']) ?? 1;
-  const itemsPerPage = Number(searchParams['per_page']) ?? 5;
-  const { reviews, totalReviews } = await fetchReviews(id, page, itemsPerPage);
+  let page = Number(searchParams?.page) || 1;
+  page = !page || page < 1 ? 1 : page;
 
-  const totalPages = Math.ceil(totalReviews / itemsPerPage);
+  const perPage = 5;
+  const { reviews, totalReviews } = await fetchReviews(id, page, perPage);
+
+  const totalPages = Math.ceil(totalReviews / 5);
+
+  const prevPage = page - 1 ? page - 1 : 1;
+  const nextPage = page + 1;
+  const pageOutofRange = page > totalPages;
+
+  const pageNumbers = [];
+  const offsetNumber = 3;
+  for (let i = page - offsetNumber; i <= page + offsetNumber; i++) {
+    if (i >= 1 && i <= totalPages) {
+      pageNumbers.push(i);
+    }
+  }
 
   return (
     <>
@@ -42,7 +60,58 @@ export default async function ReviewsList({
             </li>
           ))}
         </ul>
-        <PaginationControls />
+
+        {pageOutofRange ? (
+          <div className="text-white font-light italic">
+            Inga kommentarer än...
+          </div>
+        ) : (
+          <div className="flex justify-center items-center mt-10">
+            <div className="flex border-[1px] gap-4 rounded border-custom_yellow p-2">
+              {page === 1 ? (
+                <div className="opacity-60 text-white" aria-disabled="true">
+                  <ChevronLeftIcon className="text-custom_yellow w-6 h-6" />
+                </div>
+              ) : (
+                <Link
+                  scroll={false}
+                  className="text-custom_yellow"
+                  href={`?page=${prevPage}`}
+                  aria-label="Previous Page">
+                  <ChevronLeftIcon className="text-custom_yellow w-6 h-6" />
+                </Link>
+              )}
+
+              {pageNumbers.map((pageNumber, index) => (
+                <Link
+                  scroll={false}
+                  key={index}
+                  className={
+                    page === pageNumber
+                      ? 'text-white font-bold px-2 rounded-md bg-custom_yellow'
+                      : ' text-white'
+                  }
+                  href={`?page=${pageNumber}`}>
+                  {pageNumber}
+                </Link>
+              ))}
+
+              {page === totalPages ? (
+                <div className="opacity-60 text-white" aria-disabled="true">
+                  <ChevronRightIcon className="text-custom_yellow w-6 h-6" />
+                </div>
+              ) : (
+                <Link
+                  scroll={false}
+                  className="text-custom_yellow"
+                  href={`?page=${nextPage}`}
+                  aria-label="Next Page">
+                  <ChevronRightIcon className="text-custom_yellow w-6 h-6" />
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

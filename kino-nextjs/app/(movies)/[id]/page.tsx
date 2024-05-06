@@ -7,7 +7,9 @@ export default function Page({
   searchParams,
 }: {
   params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams?: {
+    page?: string;
+  };
 }) {
   return (
     <>
