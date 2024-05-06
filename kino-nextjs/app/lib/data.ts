@@ -10,13 +10,22 @@ mongoose.connect(URL).catch((error) => {
   throw new Error(error);
 });
 
-export default async function fetchMoviesNow(query: string) {
+export async function fetchMoviesNow() {
   try {
     const movies: Movies = await Movie.find({
       Released: true,
+    });
+
+    return movies;
+  } catch {
+    throw new Error('Failed to fetch current movies.');
+  }
+}
+export async function searchMoviesNow(query: string) {
+  try {
+    const movies: Movies = await Movie.find({
       $or: [
         { Title: { $regex: query, $options: 'i' } },
-        { Description: { $regex: query, $options: 'i' } },
         { Genre: { $regex: query, $options: 'i' } },
       ],
     }).exec();
