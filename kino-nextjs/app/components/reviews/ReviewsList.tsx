@@ -27,7 +27,6 @@ export default async function ReviewsList({
 
   const prevPage = page - 1 ? page - 1 : 1;
   const nextPage = page + 1;
-  const pageOutofRange = page > totalPages;
 
   const pageNumbers = [];
   const offsetNumber = 3;
@@ -61,11 +60,7 @@ export default async function ReviewsList({
           ))}
         </ul>
 
-        {pageOutofRange ? (
-          <div className="text-white font-light italic">
-            Sidan finns inte...
-          </div>
-        ) : totalReviews == 0 ? (
+        {totalReviews == 0 ? (
           <div className="text-white font-light italic">
             Inga kommentarer än...
           </div>
