@@ -29,8 +29,7 @@ export default function ReviewForm() {
           placeholder="Namn..."
           required
         />
-        <input
-          type="text"
+        <textarea
           name="comment"
           className="px-4 py-2 mb-3 rounded text-black"
           placeholder="Kommentar..."
