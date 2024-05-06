@@ -63,6 +63,10 @@ export default async function ReviewsList({
 
         {pageOutofRange ? (
           <div className="text-white font-light italic">
+            Sidan finns inte...
+          </div>
+        ) : totalReviews == 0 ? (
+          <div className="text-white font-light italic">
             Inga kommentarer än...
           </div>
         ) : (

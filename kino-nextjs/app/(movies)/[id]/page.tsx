@@ -14,7 +14,7 @@ export default function Page({
   return (
     <>
       <Movie id={params.id} />
-      <div className="w-1/3 m-auto">
+      <div className="px-5 m-auto sm:w-5/6 md:w-1/2 lg:w-1/3">
         <ReviewForm />
         <ReviewsList id={params.id} searchParams={searchParams} />
       </div>
