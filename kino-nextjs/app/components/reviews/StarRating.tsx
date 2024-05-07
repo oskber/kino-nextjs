@@ -15,7 +15,7 @@ export default function StarRating({ onRatingChange }: StarRatingProps) {
   };
 
   return (
-    <div className="mb-3">
+    <div className='mb-3'>
       {[...Array(5)].map((_, i) => {
         const currentRating = i + 1;
         return (
@@ -24,11 +24,11 @@ export default function StarRating({ onRatingChange }: StarRatingProps) {
             onMouseEnter={() => setHoverRating(currentRating)}
             onMouseLeave={() => setHoverRating(0)}>
             <input
-              type="radio"
-              name="rating"
+              type='radio'
+              name='rating'
               value={currentRating}
               onClick={() => handleRatingChange(currentRating)}
-              className="hidden"
+              className='hidden'
             />
             <StarIcon
               key={i}

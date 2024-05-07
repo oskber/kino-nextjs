@@ -38,21 +38,21 @@ export default async function ReviewsList({
 
   return (
     <>
-      <div className="flex flex-col rounded">
+      <div className='flex flex-col rounded'>
         <ul>
           {reviews.map((review) => (
             <li
-              className="text-white flex justify-between gap-1 border-b-2 border-custom_yellow p-2 break-all"
+              className='text-white flex justify-between gap-1 border-b-2 border-custom_yellow p-2 break-all'
               key={review._id}>
-              <div className="flex-1">
-                <h3 className="font-bold">{review.name}</h3>
-                <p className="pr-10">{review.comment}</p>
+              <div className='flex-1'>
+                <h3 className='font-bold'>{review.name}</h3>
+                <p className='pr-10'>{review.comment}</p>
               </div>
-              <p className="pt-2">
+              <p className='pt-2'>
                 {Array.from({ length: review.rating }).map((_, i) => (
                   <StarIcon
                     key={i}
-                    className="inline-block w-5 h-5 mr-0.5 text-custom_yellow"
+                    className='inline-block w-5 h-5 mr-0.5 text-custom_yellow'
                   />
                 ))}
               </p>
@@ -61,23 +61,23 @@ export default async function ReviewsList({
         </ul>
 
         {totalReviews == 0 ? (
-          <div className="text-white font-light italic">
+          <div className='text-white font-light italic'>
             Inga kommentarer än...
           </div>
         ) : (
-          <div className="flex justify-center items-center mt-7">
-            <div className="flex border-[1px] gap-4 rounded border-custom_yellow p-2">
+          <div className='flex justify-center items-center mt-7'>
+            <div className='flex border-[1px] gap-4 rounded border-custom_yellow p-2'>
               {page === 1 ? (
-                <div className="opacity-60 text-white" aria-disabled="true">
-                  <ChevronLeftIcon className="text-custom_yellow w-6 h-6" />
+                <div className='opacity-60 text-white' aria-disabled='true'>
+                  <ChevronLeftIcon className='text-custom_yellow w-6 h-6' />
                 </div>
               ) : (
                 <Link
                   scroll={false}
-                  className="text-custom_yellow"
+                  className='text-custom_yellow'
                   href={`?page=${prevPage}`}
-                  aria-label="Previous Page">
-                  <ChevronLeftIcon className="text-custom_yellow w-6 h-6" />
+                  aria-label='Previous Page'>
+                  <ChevronLeftIcon className='text-custom_yellow w-6 h-6' />
                 </Link>
               )}
 
@@ -96,16 +96,16 @@ export default async function ReviewsList({
               ))}
 
               {page === totalPages ? (
-                <div className="opacity-60 text-white" aria-disabled="true">
-                  <ChevronRightIcon className="text-custom_yellow w-6 h-6" />
+                <div className='opacity-60 text-white' aria-disabled='true'>
+                  <ChevronRightIcon className='text-custom_yellow w-6 h-6' />
                 </div>
               ) : (
                 <Link
                   scroll={false}
-                  className="text-custom_yellow"
+                  className='text-custom_yellow'
                   href={`?page=${nextPage}`}
-                  aria-label="Next Page">
-                  <ChevronRightIcon className="text-custom_yellow w-6 h-6" />
+                  aria-label='Next Page'>
+                  <ChevronRightIcon className='text-custom_yellow w-6 h-6' />
                 </Link>
               )}
             </div>

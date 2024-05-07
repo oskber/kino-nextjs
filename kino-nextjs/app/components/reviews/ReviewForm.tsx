@@ -18,21 +18,21 @@ export default function ReviewForm() {
           ref.current?.reset();
           await addReview(formData, movieId, rating);
         }}
-        className="flex flex-col mb-5 mt-5">
-        <h1 className="text-custom_yellow  mb-2 font-bold">
+        className='flex flex-col mb-5 mt-5'>
+        <h1 className='text-custom_yellow  mb-2 font-bold'>
           Vad tyckte du om filmen?
         </h1>
         <input
-          type="text"
-          name="name"
-          className="px-4 py-2 mb-3 rounded text-black"
-          placeholder="Namn..."
+          type='text'
+          name='name'
+          className='px-4 py-2 mb-3 rounded text-black'
+          placeholder='Namn...'
           required
         />
         <textarea
-          name="comment"
-          className="px-4 py-2 mb-3 rounded text-black"
-          placeholder="Kommentar..."
+          name='comment'
+          className='px-4 py-2 mb-3 rounded text-black'
+          placeholder='Kommentar...'
           required
         />
         <StarRating onRatingChange={setRating} />
