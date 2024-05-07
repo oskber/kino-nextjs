@@ -65,7 +65,7 @@ export default async function ReviewsList({
             Inga kommentarer än...
           </div>
         ) : (
-          <div className="flex justify-center items-center mt-10">
+          <div className="flex justify-center items-center mt-7">
             <div className="flex border-[1px] gap-4 rounded border-custom_yellow p-2">
               {page === 1 ? (
                 <div className="opacity-60 text-white" aria-disabled="true">
