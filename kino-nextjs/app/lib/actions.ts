@@ -8,6 +8,8 @@ import { userModel } from './schema.js';
 import { signIn } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
+import { Review } from './schema';
+import { revalidatePath } from 'next/cache';
 
 export async function createUser(prevState: State | undefined, formData: FormData) {
   const { name, lastname, email, password, password2 } = Object.fromEntries(formData);
@@ -57,3 +59,22 @@ export async function authenticate(
     throw error;
   }
 }
+
+export const addReview = async (formData: FormData, movieId: String, rating: number) => {
+
+  const name = formData.get('name');
+  const comment = formData.get('comment');
+
+  const review = new Review({ name, comment, movieId, rating });
+  console.log(review);
+
+  try {
+    await review.save();
+    console.log('Review added');
+  } catch (error) {
+    console.error('Failed to add review', error);
+  }
+
+  revalidatePath('/');
+  
+};

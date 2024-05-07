@@ -1,5 +1,5 @@
 import { Tmovie, Movies } from './types';
-import { Movie } from './schema';
+import { Movie, Review } from './schema';
 import mongoose from 'mongoose';
 
 //Here we will fetch all the different data from database when it is set up
@@ -52,5 +52,19 @@ export async function fetchComingMovies() {
   } catch (error) {
     console.error('Error fetching movies:', error);
     return [];
+  }
+}
+
+export async function fetchReviews(id: string, page: number, perPage: number) {
+  try {
+    const totalReviews = await Review.countDocuments({ movieId: id });
+    const reviews = await Review
+    .find({ movieId: id })
+    .skip(perPage * (page - 1))
+    .limit(perPage);
+
+    return {reviews, totalReviews};
+  } catch (error) {
+    throw new Error('Failed to fetch reviews');
   }
 }
