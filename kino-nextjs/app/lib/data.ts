@@ -1,7 +1,5 @@
-
-
 import { Tmovie, Movies } from './types';
-import { Movie } from './schema';
+import { Movie, Review } from './schema';
 import mongoose from 'mongoose';
 
 //Here we will fetch all the different data from database when it is set up
@@ -9,14 +7,31 @@ import mongoose from 'mongoose';
 const URL: string = process.env.DB_URL ?? '';
 
 mongoose.connect(URL).catch((error) => {
-    throw new Error(error);
+  throw new Error(error);
 });
 
-export default async function fetchMoviesNow() {
-  try{
-    const movies: Movies = await Movie.find({ Released: true });
+export async function fetchMoviesNow() {
+  try {
+    const movies: Movies = await Movie.find({
+      Released: true,
+    });
+
     return movies;
-  }catch{
+  } catch {
+    throw new Error('Failed to fetch current movies.');
+  }
+}
+export async function searchMoviesNow(query: string) {
+  try {
+    const movies: Movies = await Movie.find({
+      $or: [
+        { Title: { $regex: query, $options: 'i' } },
+        { Genre: { $regex: query, $options: 'i' } },
+      ],
+    }).exec();
+
+    return movies;
+  } catch {
     throw new Error('Failed to fetch current movies.');
   }
 }
@@ -40,3 +55,16 @@ export async function fetchComingMovies() {
   }
 }
 
+export async function fetchReviews(id: string, page: number, perPage: number) {
+  try {
+    const totalReviews = await Review.countDocuments({ movieId: id });
+    const reviews = await Review
+    .find({ movieId: id })
+    .skip(perPage * (page - 1))
+    .limit(perPage);
+
+    return {reviews, totalReviews};
+  } catch (error) {
+    throw new Error('Failed to fetch reviews');
+  }
+}
