@@ -10,19 +10,16 @@ type Link = {
   name: string;
 };
 
-const links: Link[] = [
-  { href: '/', name: 'Hem' },
-  { href: '/about', name: 'Om oss' },
-  { href: '/login', name: 'Logga in' },
-  { href: '/register', name: 'Skapa konto' },
-];
-
-const NavBar = () => {
+const NavBar = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+  const links: Link[] = [
+    { href: '/', name: 'Hem' },
+    { href: '/about', name: 'Om oss' },
+    { href: isLoggedIn ? 'profile' : 'login', name: isLoggedIn ? 'Mina sidor' : 'Logga in'},
+  ];
   return (
     <nav className="flex justify-center top-5 sticky">
       <div className="bg-custom_red w-10/12 rounded-xl">

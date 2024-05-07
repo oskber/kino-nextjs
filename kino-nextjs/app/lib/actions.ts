@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
 import { userModel } from './schema.js';
-import { signIn } from '../../auth';
+import { signIn, auth } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
 
@@ -56,4 +56,9 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function getUser() {
+  const session = await auth();
+  return session?.user;
 }
