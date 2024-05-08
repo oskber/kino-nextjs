@@ -23,6 +23,7 @@ export default function ReviewForm() {
           Vad tyckte du om filmen?
         </h1>
         <input
+          data-cy={'name-input'}
           type='text'
           name='name'
           className='px-4 py-2 mb-3 rounded text-black'
@@ -30,6 +31,7 @@ export default function ReviewForm() {
           required
         />
         <textarea
+          data-cy={'comment-input'}
           name='comment'
           className='px-4 py-2 mb-3 rounded text-black'
           placeholder='Kommentar...'

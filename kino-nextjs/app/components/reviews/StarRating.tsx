@@ -31,6 +31,7 @@ export default function StarRating({ onRatingChange }: StarRatingProps) {
               className='hidden'
             />
             <StarIcon
+              data-cy={'rating'}
               key={i}
               className={`w-8 h-8 inline-block align-text-top mr-0.5 cursor-pointer ${
                 currentRating <= (hoverRating || rating)

@@ -1,6 +1,11 @@
 import Movie from '../../components/movies/Movie';
 import ReviewForm from '../../components/reviews/ReviewForm';
 import ReviewsList from '../../components/reviews/ReviewsList';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Filmsida',
+};
 
 export default function Page({
   params,

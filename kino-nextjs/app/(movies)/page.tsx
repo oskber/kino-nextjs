@@ -1,6 +1,12 @@
 import MoviesNow from '../components/movies/MoviesNow';
 import ComingMovies from '../components/movies/ComingMovies';
-import SearchModal from '../components/navigation/SearchBar/searchModal';
+import SearchModal from '../components/navigation/SearchBar/SearchModal';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Startsida',
+};
+
 export default function Page({
   searchParams,
 }: {

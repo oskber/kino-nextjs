@@ -7,7 +7,10 @@ import Footer from './components/navigation/footer/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Bihjografen',
+  title: {
+    template: '%s | Bihjografen',
+    default: 'Bihjografen',
+  },
   description: 'Din Bihjograf i Hjo',
 };
 

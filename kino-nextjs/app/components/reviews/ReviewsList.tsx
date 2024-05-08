@@ -38,7 +38,7 @@ export default async function ReviewsList({
 
   return (
     <>
-      <div className='flex flex-col rounded'>
+      <div data-cy={'review-list'} className='flex flex-col rounded'>
         <ul>
           {reviews.map((review) => (
             <li
