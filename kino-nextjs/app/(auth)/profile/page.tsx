@@ -1,5 +1,7 @@
+import { TrophyIcon } from '@heroicons/react/24/outline';
+
 import SearchModal from '../../components/navigation/SearchBar/searchModal';
-import ProfilePage from '../../components/profilepage/profilepage';
+import ProfilePage from '../../components/profilepage/ProfilePage';
 export default function Page({
   searchParams,
 }: {
@@ -10,6 +12,7 @@ export default function Page({
     <main className=''>
       <section className='flex flex-col items-center mt-10 gap-10'>
         <SearchModal query={query} />
+
         <div className='text-white text-center flex flex-col'>
           <h1 className='text-2xl max-w-sm'>
             Välkommen namn till din personliga BiHjografsida
@@ -19,8 +22,8 @@ export default function Page({
             med Hjo's mest framgångsrika skådespelare.
           </p>
         </div>
-        <ProfilePage />
       </section>
+      <ProfilePage />
     </main>
   );
 }
