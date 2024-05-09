@@ -29,7 +29,7 @@ export default async function Screenings({ id, date }: { id: string; date: strin
                                 <Link
                                     className='bg-custom_yellow font-bold py-1 px-4 rounded-sm ml-10 hover:bg-amber-500'
                                     href={{
-                                        pathname: `${id}/book/`,
+                                        pathname: `${id}/seats`,
                                         query: JSON.parse(JSON.stringify(screening._id)),
                                     }}
                                 >
