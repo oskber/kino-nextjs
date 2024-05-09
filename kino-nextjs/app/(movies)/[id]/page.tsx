@@ -2,6 +2,11 @@ import Movie from '../../components/movies/Movie';
 import ReviewForm from '../../components/reviews/ReviewForm';
 import ReviewsList from '../../components/reviews/ReviewsList';
 import Screenings from "../../components/movies/Screenings";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Filmsida',
+};
 
 export default async function Page({
     params,
