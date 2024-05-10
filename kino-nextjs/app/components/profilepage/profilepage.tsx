@@ -31,7 +31,7 @@ export default function ProfilePage() {
       <div className='flex justify-center'>
         <strong> Du är guldmedlem!</strong>
       </div>
-      <nav className='flex justify-evenly mr-2 ml-2 mt-10'>
+      <nav className='flex justify-evenly mr-2 ml-2 mt-10 sm:justify-center sm:gap-10'>
         <ProfilePageButton handleClick={showBonus} name={'Dina bonusar'} />
         <ProfilePageButton handleClick={showSettings} name={'Inställningar'} />
       </nav>
@@ -51,7 +51,8 @@ export default function ProfilePage() {
             <PencilSquareIcon className='h-6 w-6 text-gray-500' />
           </li>
           <li className='flex flex-row'>
-            Kreditkort: <PencilSquareIcon className='h-6 w-6 text-gray-500' />
+            Kreditkort
+            <PencilSquareIcon className='h-6 w-6 text-gray-500' />
           </li>
         </ul>
         <div className={showBonusElement ? `${''}` : `${'hidden'}`}>
