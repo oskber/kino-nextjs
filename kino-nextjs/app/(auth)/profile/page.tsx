@@ -2,6 +2,12 @@ import { TrophyIcon } from '@heroicons/react/24/outline';
 
 import SearchModal from '../../components/navigation/SearchBar/searchModal';
 import ProfilePage from '../../components/profilepage/ProfilePage';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Min sida',
+};
+
 export default function Page({
   searchParams,
 }: {
