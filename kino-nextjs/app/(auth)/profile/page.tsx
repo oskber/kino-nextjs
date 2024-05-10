@@ -1,7 +1,7 @@
-import SearchModal from '../../components/navigation/SearchBar/SearchModal';
+import SearchDropdown from '../../components/navigation/SearchBar/SearchDropdown';
 import ProfilePage from '../../components/profilepage/profilepage';
 import { Metadata } from 'next';
-import { getUser } from '../../lib/actions';
+// import { getUser } from '../../lib/actions';
 export const metadata: Metadata = {
   title: 'Min sida',
 };
@@ -16,7 +16,7 @@ export default async function Page({
   return (
     <main className=''>
       <section className='flex flex-col items-center mt-10 gap-10'>
-        <SearchModal query={query} />
+        <SearchDropdown query={query} />
 
         <div className='text-white text-center flex flex-col'>
           <h1 className='text-2xl max-w-sm'>

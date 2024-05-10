@@ -1,16 +1,15 @@
-import MovieButton from '../../movies/MovieButton';
 import { searchMoviesNow } from '../../../lib/data';
 import SearchMovies from './SearchInput';
 import Link from 'next/link';
 
-export default async function SearchModal({ query }: { query: string }) {
+export default async function SearchDropdown({ query }: { query: string }) {
   const movies = query.length > 2 ? await searchMoviesNow(query) : [];
 
   return (
     <>
       <search className='flex flex-col justify-self-center'>
         <SearchMovies />
-        <div className='max-h-80 bg-white text-black gap-1 w-[350px] overflow-y-scroll overflow-x-hidden rounded-b-lg'>
+        <div className='max-h-85 bg-white text-black gap-1 w-[350px] overflow-y-scroll overflow-x-hidden rounded-b-lg'>
           {query.length > 0 &&
             movies.map((movie) => (
               <Link
