@@ -2,7 +2,8 @@ describe('visits homepage', () => {
   it('passes', () => {
     cy.visit('http://localhost:3000');
   });
-
+});
+describe('clicks on a movie and adds a review', () => {
   it('clicks the button on a movie on homepage', () => {
     cy.get(':nth-child(1) > .pl-3 > [data-cy="movie-button"]').click();
   });
@@ -13,8 +14,10 @@ describe('visits homepage', () => {
     cy.get('[data-cy="review-submit-button"]').click();
     cy.get('[data-cy="review-list"]').contains('success-1122334455');
   });
-  it('removes comment from database and updates page', () => {
-    cy.task('removeTestComments');
-    cy.reload();
+  describe('removes review from database and updates page', () => {
+    it('removes review from database and updates page', () => {
+      cy.task('removeTestReviews');
+      cy.reload();
+    });
   });
 });

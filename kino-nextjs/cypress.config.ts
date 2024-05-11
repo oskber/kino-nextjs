@@ -9,7 +9,7 @@ export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       on('task', {
-        async removeTestComments() {
+        async removeTestReviews() {
           const URL: string = process.env.DB_URL as string;
           await mongoose.connect(URL).catch((error) => {
             throw new Error(error);
