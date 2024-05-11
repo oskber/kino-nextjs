@@ -5,7 +5,6 @@ import ProfilePageButton from './ProfileCtaButton';
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 // import { getUser } from '../../lib/actions';
 import { useState, useEffect } from 'react';
-import { User } from '../../lib/definitions';
 
 // interface UserData {
 //   email: string;
@@ -46,26 +45,24 @@ export default function ProfilePage() {
       <div className='flex justify-center'>
         <strong> Du är guldmedlem!</strong>
       </div>
-      <nav className='flex justify-evenly mr-2 ml-2 mt-10 sm:justify-center sm:gap-10'>
+      <div className='flex justify-evenly mr-2 ml-2 mt-10 sm:justify-center sm:gap-10'>
         <ProfilePageButton handleClick={showBonus} name={'Dina bonusar'} />
         <ProfilePageButton handleClick={showSettings} name={'Inställningar'} />
-      </nav>
+      </div>
       <div
-        className='flex flex-col gap-5 mt-10'
+        className='mt-10 flex flex-col gap-5'
         // className={
         //   showSettingsElement && showBonusElement
         //     ? `mt-10 flex content-center gap-10 bg-red-500`
         //     : ` mt-10 flex justify-center`
         // }
       >
-        <div>
-          <ul
-            className={
-              showSettingsElement
-                ? `${'flex justify-center gap-5'}`
-                : `${'hidden'}`
-            }
-          >
+        <div
+          className={
+            showSettingsElement ? `${'flex justify-center'}` : `${'hidden'}`
+          }
+        >
+          <ul>
             <li className='flex flex-row'>
               Mail:
               {/* Mail: {`${user?.email}`} */}
@@ -83,14 +80,14 @@ export default function ProfilePage() {
         </div>
         <div
           className={
-            showBonusElement ? `${'flex justify-center'}` : `${'hidden'}`
+            showBonusElement ? `${'flex justify-center gap-1'}` : `${'hidden'}`
           }
         >
           <p className='flex flex-row gap-1'>
-            Du har <strong className='border-b'>200</strong> bonuspoäng!
-            <CurrencyDollarIcon className='h-6 w-6 text-gray-500' />
+            Du har <strong className='border-b'>200</strong>
+            <CurrencyDollarIcon className='h-6 w-6 text-gray-500' /> bonuspoäng!
           </p>
-          <span className='border-b'>Använd dem nu!</span>
+          <span className='border-b cursor-wait'>Använd dem nu!</span>
         </div>
       </div>
     </section>
