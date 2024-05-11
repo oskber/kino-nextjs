@@ -19,7 +19,11 @@ export default function SearchMovies() {
   }, 600);
   return (
     <>
+      <label htmlFor='searchMovies' className='text-custom_yellow'>
+        Sök på din Bihjofilm!
+      </label>
       <input
+        id='searchMovies'
         placeholder='Sök på din Bihjofilm!'
         className='w-[350px] h-9 justify-self-center rounded-t-lg pl-2'
         onChange={(e) => {
