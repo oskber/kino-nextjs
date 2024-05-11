@@ -84,10 +84,11 @@ export default function ProfilePage() {
           }
         >
           <p className='flex flex-row gap-1'>
-            Du har <strong className='border-b'>200</strong>
-            <CurrencyDollarIcon className='h-6 w-6 text-gray-500' /> bonuspoäng!
+            Du har <strong className='text-custom_yellow'>200</strong>
+            <CurrencyDollarIcon className='h-6 w-6 text-custom_yellow' />{' '}
+            bonuspoäng!
           </p>
-          <span className='border-b cursor-wait'>Använd dem nu!</span>
+          <span className='cursor-wait text-custom_yellow'>Använd dem nu!</span>
         </div>
       </div>
     </section>
