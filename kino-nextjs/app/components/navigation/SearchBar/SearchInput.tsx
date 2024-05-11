@@ -19,7 +19,10 @@ export default function SearchMovies() {
   }, 600);
   return (
     <>
-      <label htmlFor='searchMovies' className='text-custom_yellow'>
+      <label
+        htmlFor='searchMovies'
+        className='text-custom_yellow self-center md:self-start'
+      >
         Sök på din Bihjofilm!
       </label>
       <input
