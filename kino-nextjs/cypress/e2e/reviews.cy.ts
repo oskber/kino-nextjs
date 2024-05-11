@@ -3,10 +3,10 @@ describe('visits homepage', () => {
     cy.visit('http://localhost:3000');
   });
 
-  it('clicks on movie button', () => {
+  it('clicks the button on a movie on homepage', () => {
     cy.get(':nth-child(1) > .pl-3 > [data-cy="movie-button"]').click();
   });
-  it('adds comment', () => {
+  it('adds name, comment and 3-star rating and submits review', () => {
     cy.get('[data-cy="name-input"]').type('Test');
     cy.get('[data-cy="comment-input"]').type('success-1122334455');
     cy.get(':nth-child(3) > [data-cy="rating"]').click();
