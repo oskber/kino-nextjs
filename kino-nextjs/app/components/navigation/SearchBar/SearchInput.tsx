@@ -28,7 +28,7 @@ export default function SearchMovies() {
       <input
         id='searchMovies'
         placeholder='Sök på din Bihjofilm!'
-        className='w-[350px] h-9 justify-self-center rounded-t-lg pl-2'
+        className='w-[350px] h-9 justify-self-center rounded-lg pl-2'
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
