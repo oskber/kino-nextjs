@@ -3,23 +3,23 @@ import { TrophyIcon } from '@heroicons/react/24/outline';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import ProfilePageButton from './ProfileCtaButton';
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
-// import { getUser } from '../../lib/actions';
+import { getUser } from '../../lib/actions';
 import { useState, useEffect } from 'react';
 
-// interface UserData {
-//   email: string;
-//   name: string;
-// }
+interface UserData {
+  email: string;
+  name: string;
+}
 
 export default function ProfilePage() {
-  //   const [user, setUser] = useState<User | null>(null);
-  //   useEffect(() => {
-  //     async function fetchUser() {
-  //       const userData = await getUser();
-  //       setUser(userData);
-  //     }
-  //     fetchUser();
-  //   }, []);
+  const [user, setUser] = useState<UserData | null>(null);
+  useEffect(() => {
+    async function fetchUser() {
+      const userData = await getUser();
+      setUser(userData);
+    }
+    fetchUser();
+  }, []);
 
   const [showBonusElement, setShowBonus] = useState(false);
   const [showSettingsElement, setShowSettingElement] = useState(false);
@@ -65,7 +65,7 @@ export default function ProfilePage() {
           <ul>
             <li className='flex flex-row'>
               Mail:
-              {/* Mail: {`${user?.email}`} */}
+              {`${user?.email}`}
               <PencilSquareIcon className='h-6 w-6 text-gray-500' />
             </li>
             <li className='flex flex-row'>
