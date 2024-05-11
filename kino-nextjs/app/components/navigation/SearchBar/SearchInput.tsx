@@ -21,9 +21,10 @@ export default function SearchMovies() {
     <>
       <label
         htmlFor='searchMovies'
-        className='text-custom_yellow self-center md:self-start'
+        className='flex flex-row gap-1 text-custom_yellow self-center md:self-start'
       >
         Sök på din Bihjofilm!
+        <MagnifyingGlassIcon className='w-5 h-5' />
       </label>
       <input
         id='searchMovies'
