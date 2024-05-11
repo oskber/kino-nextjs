@@ -5,13 +5,22 @@ import Link from 'next/link';
 export default async function SearchDropdown({ query }: { query: string }) {
   const movies = query.length > 2 ? await searchMoviesNow(query) : [];
 
-  return (
-    <>
+  if (movies.length == 0 && query.length > 2) {
+    return (
       <search className='flex flex-col justify-self-center mb-5'>
         <SearchMovies />
-        <div className='max-h-85 bg-white text-black gap-1 w-[350px] overflow-y-scroll overflow-x-hidden'>
-          {query.length > 0 &&
-            movies.map((movie) => (
+        <strong className='text-red-200 self-center md:self-start mt-1 animate-pulse'>
+          Sökningen gav inget resultat :,(
+        </strong>
+      </search>
+    );
+  } else {
+    return (
+      <>
+        <search className='flex flex-col justify-self-center mb-5'>
+          <SearchMovies />
+          <div className='max-h-85 bg-white text-black gap-1 w-[350px] overflow-y-scroll overflow-x-hidden'>
+            {movies.map((movie) => (
               <Link
                 href={`http://localhost:3000/${movie._id}`}
                 key={`${movie._id}`}
@@ -29,8 +38,9 @@ export default async function SearchDropdown({ query }: { query: string }) {
                 </div>
               </Link>
             ))}
-        </div>
-      </search>
-    </>
-  );
+          </div>
+        </search>
+      </>
+    );
+  }
 }
