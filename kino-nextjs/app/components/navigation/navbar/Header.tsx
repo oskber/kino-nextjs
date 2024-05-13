@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from './bihjografenlogo.png';
+import { logout } from '../../../lib/actions';
 
 type Link = {
   href: string;
@@ -75,7 +76,7 @@ const NavBar = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                   </Link>
                 </li>
               ))}
-            </ul>
+            { isLoggedIn && <li><button className="block py-2 px-3 md:p-0 rounded hover:bg-custom_yellow focus:bg-custom_yellow md:hover:bg-transparent md:focus:bg-transparent md:border-0 md:hover:text-custom_yellow md:focus:text-custom_yellow text-white" onClick={async () => await logout()}>Logga ut</button></li>}            </ul>
           </div>
         </div>
       </div>

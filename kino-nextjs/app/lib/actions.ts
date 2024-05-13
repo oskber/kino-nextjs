@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
 import { userModel } from './schema.js';
-import { signIn, auth } from '../../auth';
+import { signIn, auth, signOut } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
 import { Review } from './schema';
@@ -79,7 +79,9 @@ export const addReview = async (formData: FormData, movieId: String, rating: num
   } catch (error) {
     console.error('Failed to add review', error);
   }
-  
   revalidatePath('/');
-  
 };
+
+export async function logout() {
+  await signOut();
+}
