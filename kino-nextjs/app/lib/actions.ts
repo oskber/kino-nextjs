@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
-import { userModel } from './schema.js';
+import { userModel } from './schema';
 import { signIn, auth, signOut } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
