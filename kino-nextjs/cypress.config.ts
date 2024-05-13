@@ -1,6 +1,6 @@
 import { defineConfig } from 'cypress';
 import mongoose from 'mongoose';
-import { Review } from '../kino-nextjs/app/lib/schema.js';
+import { Review } from '../kino-nextjs/app/lib/schema';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
