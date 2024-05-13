@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
-import { userModel } from './schema';
-import { signIn } from '../../auth';
+import { userModel } from './schema.js';
+import { signIn, auth, signOut } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
 import { Review } from './schema';
@@ -60,6 +60,11 @@ export async function authenticate(
   }
 }
 
+export async function getUser() {
+  const session = await auth();
+  return session?.user;
+}
+
 export const addReview = async (formData: FormData, movieId: String, rating: number) => {
 
   const name = formData.get('name');
@@ -74,7 +79,9 @@ export const addReview = async (formData: FormData, movieId: String, rating: num
   } catch (error) {
     console.error('Failed to add review', error);
   }
-
   revalidatePath('/');
-  
 };
+
+export async function logout() {
+  await signOut();
+}

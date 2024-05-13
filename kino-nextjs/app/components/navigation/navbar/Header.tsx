@@ -4,25 +4,23 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from './bihjografenlogo.png';
+import { logout } from '../../../lib/actions';
 
 type Link = {
   href: string;
   name: string;
 };
 
-const links: Link[] = [
-  { href: '/', name: 'Hem' },
-  { href: '/about', name: 'Om oss' },
-  { href: '/login', name: 'Logga in' },
-  { href: '/register', name: 'Skapa konto' },
-];
-
-const NavBar = () => {
+const NavBar = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+  const links: Link[] = [
+    { href: '/', name: 'Hem' },
+    { href: '/about', name: 'Om oss' },
+    { href: isLoggedIn ? 'profile' : 'login', name: isLoggedIn ? 'Mina sidor' : 'Logga in'},
+  ];
   return (
     <nav className="flex justify-center top-5 sticky">
       <div className="bg-custom_red w-10/12 rounded-xl">
@@ -78,7 +76,7 @@ const NavBar = () => {
                   </Link>
                 </li>
               ))}
-            </ul>
+            { isLoggedIn && <li><button className="block py-2 px-3 md:p-0 rounded hover:bg-custom_yellow focus:bg-custom_yellow md:hover:bg-transparent md:focus:bg-transparent md:border-0 md:hover:text-custom_yellow md:focus:text-custom_yellow text-white" onClick={async () => await logout()}>Logga ut</button></li>}            </ul>
           </div>
         </div>
       </div>
