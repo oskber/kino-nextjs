@@ -1,5 +1,7 @@
-import { Tmovie, Movies } from './types';
-import { Movie, Review } from './schema';
+
+
+import { Tmovie, Movies, screening } from './types';
+import { Movie, Review , Screening } from './schema';
 import mongoose from 'mongoose';
 
 //Here we will fetch all the different data from database when it is set up
@@ -37,13 +39,14 @@ export async function searchMoviesNow(query: string) {
 }
 
 export async function fetchMovie(id: string) {
-  try {
-    const movie: Tmovie | null = await Movie.findById(id);
-    return movie;
+    try {
+    const movie:Tmovie = Movie.findById(id)
+    return movie
   } catch (error) {
     throw new Error('Failed to fetch movie with id.');
   }
 }
+
 
 export async function fetchComingMovies() {
   try {
@@ -53,7 +56,7 @@ export async function fetchComingMovies() {
     console.error('Error fetching movies:', error);
     return [];
   }
-}
+};
 
 export async function fetchReviews(id: string, page: number, perPage: number) {
   try {
@@ -68,3 +71,16 @@ export async function fetchReviews(id: string, page: number, perPage: number) {
     throw new Error('Failed to fetch reviews');
   }
 }
+
+export async function fetchFilteredScreenings(id: string, date: string){
+  try{
+    const screenings: screening[] = await Screening.find({ MovieId: new mongoose.Types.ObjectId(id) })
+    const filteredScreenings= screenings.filter(screening => {
+      return screening.Date.includes(date)
+    })
+    return filteredScreenings
+  }catch(error) {
+    throw new Error('Failed to fetch screenings with id.');
+  }
+}
+
