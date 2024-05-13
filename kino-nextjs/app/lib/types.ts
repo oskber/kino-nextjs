@@ -1,14 +1,14 @@
 //Here we will put all bigger types and import the into different componenets
 
 export type Tmovie = {
-    _id: String,
-    Title: String,
-    Released: Boolean,
-    Genre: String,
-    Rating: Number,
-    imdbRating: String,
-    Description: String,
-    Poster: String,
+    _id: string,
+    Title: string,
+    Released: boolean,
+    Genre: string,
+    Rating: number,
+    imdbRating: string,
+    Description: string,
+    Poster: string,
     __v: Number,
 };
 

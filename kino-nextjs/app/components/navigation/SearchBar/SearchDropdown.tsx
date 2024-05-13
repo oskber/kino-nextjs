@@ -19,7 +19,7 @@ export default async function SearchDropdown({ query }: { query: string }) {
       <>
         <search className='flex flex-col justify-self-center mb-5'>
           <SearchMovies />
-          <div className='max-h-85 bg-white text-black gap-1 w-[350px] overflow-y-scroll overflow-x-hidden'>
+          <div className='max-h-80 bg-white text-black gap-1 w-[350px] overflow-y-scroll overflow-x-hidden'>
             {movies.map((movie) => (
               <Link
                 href={`http://localhost:3000/${movie._id}`}

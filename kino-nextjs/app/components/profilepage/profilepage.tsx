@@ -5,14 +5,12 @@ import ProfilePageButton from './ProfileCtaButton';
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import { getUser } from '../../lib/actions';
 import { useState, useEffect } from 'react';
+import { User } from 'next-auth';
 
-interface UserData {
-  email: string;
-  name: string;
-}
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState<User | undefined>();
+  
   useEffect(() => {
     async function fetchUser() {
       const userData = await getUser();
@@ -22,21 +20,10 @@ export default function ProfilePage() {
   }, []);
 
   const [showBonusElement, setShowBonus] = useState(false);
-  const [showSettingsElement, setShowSettingElement] = useState(false);
-  function showBonus() {
-    if (showBonusElement === false) {
-      setShowBonus(true);
-    } else {
-      setShowBonus(false);
-    }
-  }
-  function showSettings() {
-    if (showSettingsElement === false) {
-      setShowSettingElement(true);
-    } else {
-      setShowSettingElement(false);
-    }
-  }
+  const [showSettings, setShowSettings] = useState(false);
+
+  const toggleBonus = () => setShowBonus(!showBonusElement);
+  const toggleSettings = () => setShowSettings(!showSettings);
   return (
     <section className='text-white w-full border-t-2 border-custom_yellow mt-10 mb-10'>
       <div className='flex justify-center mt-10'>
@@ -46,21 +33,15 @@ export default function ProfilePage() {
         <strong> Du är guldmedlem!</strong>
       </div>
       <div className='flex justify-evenly mr-2 ml-2 mt-10 sm:justify-center sm:gap-10'>
-        <ProfilePageButton handleClick={showBonus} name={'Dina bonusar'} />
-        <ProfilePageButton handleClick={showSettings} name={'Inställningar'} />
+        <ProfilePageButton handleClick={toggleBonus} name={'Dina bonusar'} />
+        <ProfilePageButton
+          handleClick={toggleSettings}
+          name={'Inställningar'}
+        />
       </div>
-      <div
-        className='mt-10 flex flex-col gap-5'
-        // className={
-        //   showSettingsElement && showBonusElement
-        //     ? `mt-10 flex content-center gap-10 bg-red-500`
-        //     : ` mt-10 flex justify-center`
-        // }
-      >
+      <div className='mt-10 flex flex-col gap-5'>
         <div
-          className={
-            showSettingsElement ? `${'flex justify-center'}` : `${'hidden'}`
-          }
+          className={showSettings ? `${'flex justify-center'}` : `${'hidden'}`}
         >
           <ul>
             <li className='flex flex-row'>
