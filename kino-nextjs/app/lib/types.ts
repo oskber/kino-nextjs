@@ -9,7 +9,7 @@ export type Tmovie = {
     imdbRating: string,
     Description: string,
     Poster: string,
-    __v: Number,
+    __v: number,
 };
 
 export type Movies = Tmovie[];
