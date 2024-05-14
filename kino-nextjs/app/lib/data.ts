@@ -55,11 +55,15 @@ export async function fetchComingMovies() {
   }
 }
 
-export async function fetchReviews(id: string, page: number, perPage: number) {
+export async function fetchReviews(
+  id: string,
+  currentPage: number,
+  perPage: number
+) {
   try {
     const totalReviews = await Review.countDocuments({ movieId: id });
     const reviews = await Review.find({ movieId: id })
-      .skip(perPage * (page - 1))
+      .skip(perPage * (currentPage - 1))
       .limit(perPage);
 
     return { reviews, totalReviews };

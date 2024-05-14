@@ -5,15 +5,12 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
 import { userModel } from './schema';
-import { signIn, auth } from '../../auth';
+import { signIn, auth, signOut } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
 import { Review } from './schema';
 import { revalidatePath } from 'next/cache';
-export async function getUser() {
-  const session = await auth();
-  return session?.user;
-}
+
 
 export async function createUser(
   prevState: State | undefined,
@@ -76,6 +73,11 @@ export async function authenticate(
   }
 }
 
+export async function getUser() {
+  const session = await auth();
+  return session?.user;
+}
+
 export const addReview = async (
   formData: FormData,
   movieId: String,
@@ -85,7 +87,6 @@ export const addReview = async (
   const comment = formData.get('comment');
 
   const review = new Review({ name, comment, movieId, rating });
-  console.log(review);
 
   try {
     await review.save();
@@ -96,3 +97,8 @@ export const addReview = async (
 
   revalidatePath('/');
 };
+
+export async function logout() {
+  await signOut();
+}
+

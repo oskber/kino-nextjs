@@ -1,14 +1,14 @@
-import Link from "next/link"
+import Link from 'next/link';
 
-export default function MovieButton({movieId}: {movieId: String }){
-
+export default function MovieButton({ movieId }: { movieId: String }) {
   return (
     <>
-    <Link
-    href={`/${movieId}`}
-    className='bg-custom_yellow w-20 font-bold text-center rounded-sm mt-3'>
-      Se mer
-    </Link>
+      <Link
+        data-cy='movie-button'
+        href={`/${movieId}`}
+        className='bg-custom_yellow w-20 font-bold text-center rounded-sm mt-3'>
+        Se mer
+      </Link>
     </>
-  )
+  );
 }
