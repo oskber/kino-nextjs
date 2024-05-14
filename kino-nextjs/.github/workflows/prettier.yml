@@ -1,9 +1,10 @@
 name: Prettier Formatting
 
 on:
+  push:
+    branches: [main, master]
   pull_request:
-    branches:
-      - main
+    branches: [main, master]
 
 jobs:
   prettier:
