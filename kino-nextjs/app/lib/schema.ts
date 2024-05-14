@@ -64,7 +64,7 @@ const userSchema = new mongoose.Schema({
         required: [true, "Fyll i en e-postadress"],
         unique: [true, "Ett konto med denna e-postadress finns redan registrerat"],
         validate: {
-            validator: (value) => {
+            validator: (value: string) => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return emailRegex.test(value);
             },
@@ -75,7 +75,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Lösenordet måste vara minst 6 tecken långt"],
         validate: {
-            validator: (value) => {
+            validator: (value: string) => {
                 return value.length >= 6;
             },
             message: "Lösenordet måste vara minst 6 tecken långt",

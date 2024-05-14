@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
 import { userModel } from './schema';
-import { signIn } from '../../auth';
+import { signIn, auth, signOut } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
 import { Review } from './schema';
@@ -72,6 +72,11 @@ export async function authenticate(
   }
 }
 
+export async function getUser() {
+  const session = await auth();
+  return session?.user;
+}
+
 export const addReview = async (
   formData: FormData,
   movieId: String,
@@ -91,3 +96,8 @@ export const addReview = async (
 
   revalidatePath('/');
 };
+
+export async function logout() {
+  await signOut();
+}
+
