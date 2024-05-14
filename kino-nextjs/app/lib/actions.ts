@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
@@ -11,20 +11,32 @@ import { MongoError } from 'mongodb';
 import { Review } from './schema';
 import { revalidatePath } from 'next/cache';
 
-export async function createUser(prevState: State | undefined, formData: FormData) {
-  const { name, lastname, email, password, password2 } = Object.fromEntries(formData);
+export async function createUser(
+  prevState: State | undefined,
+  formData: FormData
+) {
+  const { name, lastname, email, password, password2 } =
+    Object.fromEntries(formData);
   const passwordsMatch = password === password2;
   let success = false;
   try {
-    const hashedPassword = password.toString().length > 5 ? await bcrypt.hash(password.toString(), 10) : '';
-    const user = new userModel({ name, lastname, email, password: hashedPassword });
+    const hashedPassword =
+      password.toString().length > 5
+        ? await bcrypt.hash(password.toString(), 10)
+        : '';
+    const user = new userModel({
+      name,
+      lastname,
+      email,
+      password: hashedPassword,
+    });
     await user.validate();
-    if(!passwordsMatch) throw new Error();
+    if (!passwordsMatch) throw new Error();
     await user.save();
     success = true; // Redirect can't be called in a try block so used boolean to check if user was created successfully
   } catch (error) {
     const errors: Array<string> = [];
-    if (!passwordsMatch) errors.push('Lösenorden matchar inte')
+    if (!passwordsMatch) errors.push('Lösenorden matchar inte');
     if (error instanceof mongoose.Error.ValidationError) {
       for (const field in error.errors) {
         errors.push(error.errors[field].message);
@@ -39,7 +51,7 @@ export async function createUser(prevState: State | undefined, formData: FormDat
 
 export async function authenticate(
   prevState: string | undefined,
-  formData: FormData,
+  formData: FormData
 ) {
   try {
     const { email, password } = Object.fromEntries(formData);
@@ -65,13 +77,15 @@ export async function getUser() {
   return session?.user;
 }
 
-export const addReview = async (formData: FormData, movieId: String, rating: number) => {
-
+export const addReview = async (
+  formData: FormData,
+  movieId: String,
+  rating: number
+) => {
   const name = formData.get('name');
   const comment = formData.get('comment');
 
   const review = new Review({ name, comment, movieId, rating });
-  console.log(review);
 
   try {
     await review.save();
@@ -79,9 +93,11 @@ export const addReview = async (formData: FormData, movieId: String, rating: num
   } catch (error) {
     console.error('Failed to add review', error);
   }
+
   revalidatePath('/');
 };
 
 export async function logout() {
   await signOut();
 }
+
