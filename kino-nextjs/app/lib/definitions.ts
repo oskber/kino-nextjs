@@ -1,4 +1,4 @@
-// Changed name on type because it's the same name as Session.User from nextAuth function from auth.ts Used by function getUserByEmail
+// Changed name on type because it's the same name as Session.User from node modules/Auth.
 
 export type DbUser = {
     id: string;
