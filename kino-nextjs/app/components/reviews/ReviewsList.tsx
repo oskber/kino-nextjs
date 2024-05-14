@@ -8,29 +8,32 @@ import Link from 'next/link';
 
 interface ReviewsListProps {
   id: string;
-  searchParams?: {
-    page?: string;
-  };
+  page?: string;
 }
 
-export default async function ReviewsList({
-  id,
-  searchParams,
-}: ReviewsListProps) {
-  let page = Number(searchParams?.page) || 1;
-  page = !page || page < 1 ? 1 : page;
+export default async function ReviewsList({ id, page }: ReviewsListProps) {
+  let currentPage = Number(page) || 1;
+  currentPage = !currentPage || currentPage < 1 ? 1 : currentPage;
 
   const perPage = 5;
-  const { reviews, totalReviews } = await fetchReviews(id, page, perPage);
+  const { reviews, totalReviews } = await fetchReviews(
+    id,
+    currentPage,
+    perPage
+  );
 
   const totalPages = Math.ceil(totalReviews / 5);
 
-  const prevPage = page - 1 ? page - 1 : 1;
-  const nextPage = page + 1;
+  const prevPage = currentPage - 1 ? currentPage - 1 : 1;
+  const nextPage = currentPage + 1;
 
   const pageNumbers = [];
   const offsetNumber = 3;
-  for (let i = page - offsetNumber; i <= page + offsetNumber; i++) {
+  for (
+    let i = currentPage - offsetNumber;
+    i <= currentPage + offsetNumber;
+    i++
+  ) {
     if (i >= 1 && i <= totalPages) {
       pageNumbers.push(i);
     }
@@ -38,7 +41,7 @@ export default async function ReviewsList({
 
   return (
     <>
-      <div className='flex flex-col rounded'>
+      <div data-cy={'review-list'} className='flex flex-col rounded'>
         <ul>
           {reviews.map((review) => (
             <li
@@ -67,7 +70,7 @@ export default async function ReviewsList({
         ) : (
           <div className='flex justify-center items-center mt-7'>
             <div className='flex border-[1px] gap-4 rounded border-custom_yellow p-2'>
-              {page === 1 ? (
+              {currentPage === 1 ? (
                 <div className='opacity-60 text-white' aria-disabled='true'>
                   <ChevronLeftIcon className='text-custom_yellow w-6 h-6' />
                 </div>
@@ -86,7 +89,7 @@ export default async function ReviewsList({
                   scroll={false}
                   key={index}
                   className={
-                    page === pageNumber
+                    currentPage === pageNumber
                       ? 'text-white font-bold px-2 rounded-md bg-custom_yellow'
                       : ' text-white'
                   }
@@ -95,7 +98,7 @@ export default async function ReviewsList({
                 </Link>
               ))}
 
-              {page === totalPages ? (
+              {currentPage === totalPages ? (
                 <div className='opacity-60 text-white' aria-disabled='true'>
                   <ChevronRightIcon className='text-custom_yellow w-6 h-6' />
                 </div>

@@ -3,7 +3,13 @@ import { screening } from '../../lib/types';
 import DateSelect from '../DateSelect';
 import { fetchFilteredScreenings } from '../../lib/data';
 
-export default async function Screenings({ id, date }: { id: string; date: string | undefined }) {
+export default async function Screenings({
+  id,
+  date,
+}: {
+  id: string;
+  date: string | undefined;
+}) {
   let screenings: screening[];
   if (!date) {
     const today = new Date().toISOString().substring(0, 10);
@@ -15,7 +21,9 @@ export default async function Screenings({ id, date }: { id: string; date: strin
   return (
     <section className='grid justify-self-stretch row-start-2'>
       <div className='text-white bg-custom_red m-10 p-10 rounded-lg w-3/4 max-w-xl justify-self-center'>
-        <h2 className='font-bold text-xl mb-3'>Välj datum och tid för att boka biljett!</h2>
+        <h2 className='font-bold text-xl mb-3'>
+          Välj datum och tid för att boka biljett!
+        </h2>
         <DateSelect />
         <ul className='mt-3 p-0'>
           {screenings.length == 0 && (
@@ -32,8 +40,7 @@ export default async function Screenings({ id, date }: { id: string; date: strin
                   href={{
                     pathname: `${id}/seats`,
                     query: JSON.parse(JSON.stringify(screening._id)),
-                  }}
-                >
+                  }}>
                   Boka
                 </Link>
               </div>

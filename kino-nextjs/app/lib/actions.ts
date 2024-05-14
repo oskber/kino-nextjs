@@ -5,20 +5,31 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { State } from '../lib/definitions';
 import { userModel } from './schema';
-import { signIn } from '../../auth';
+import { signIn, auth, signOut } from '../../auth';
 import { AuthError } from 'next-auth';
 import { MongoError } from 'mongodb';
 import { Review, Movie } from './schema';
 import { revalidatePath } from 'next/cache';
 
-export async function createUser(prevState: State | undefined, formData: FormData) {
-  const { name, lastname, email, password, password2 } = Object.fromEntries(formData);
+export async function createUser(
+  prevState: State | undefined,
+  formData: FormData
+) {
+  const { name, lastname, email, password, password2 } =
+    Object.fromEntries(formData);
   const passwordsMatch = password === password2;
   let success = false;
   try {
     const hashedPassword =
-      password.toString().length > 5 ? await bcrypt.hash(password.toString(), 10) : '';
-    const user = new userModel({ name, lastname, email, password: hashedPassword });
+      password.toString().length > 5
+        ? await bcrypt.hash(password.toString(), 10)
+        : '';
+    const user = new userModel({
+      name,
+      lastname,
+      email,
+      password: hashedPassword,
+    });
     await user.validate();
     if (!passwordsMatch) throw new Error();
     await user.save();
@@ -38,7 +49,10 @@ export async function createUser(prevState: State | undefined, formData: FormDat
   if (success) redirect('/login');
 }
 
-export async function authenticate(prevState: string | undefined, formData: FormData) {
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
   try {
     const { email, password } = Object.fromEntries(formData);
     if (!email || !password) {
@@ -58,12 +72,20 @@ export async function authenticate(prevState: string | undefined, formData: Form
   }
 }
 
-export const addReview = async (formData: FormData, movieId: String, rating: number) => {
+export async function getUser() {
+  const session = await auth();
+  return session?.user;
+}
+
+export const addReview = async (
+  formData: FormData,
+  movieId: String,
+  rating: number
+) => {
   const name = formData.get('name');
   const comment = formData.get('comment');
 
   const review = new Review({ name, comment, movieId, rating });
-  console.log(review);
 
   try {
     await review.save();
@@ -76,6 +98,10 @@ export const addReview = async (formData: FormData, movieId: String, rating: num
 
   revalidatePath('/');
 };
+
+export async function logout() {
+  await signOut();
+}
 
 async function updateMovieRating(id: String) {
   const reviews = await Review.find({ movieId: id });
