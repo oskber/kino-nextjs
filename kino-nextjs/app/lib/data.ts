@@ -1,4 +1,4 @@
-import { Tmovie, Movies, screening } from './types';
+import { Movies, screening } from './types';
 import { Movie, Review, Screening } from './schema';
 import mongoose from 'mongoose';
 
@@ -38,7 +38,7 @@ export async function searchMoviesNow(query: string) {
 
 export async function fetchMovie(id: string) {
   try {
-    const movie: Tmovie = Movie.findById(id);
+    const movie = Movie.findById(id);
     return movie;
   } catch (error) {
     throw new Error('Failed to fetch movie with id.');
@@ -83,5 +83,14 @@ export async function fetchFilteredScreenings(id: string, date: string) {
     return filteredScreenings;
   } catch (error) {
     throw new Error('Failed to fetch screenings with id.');
+  }
+}
+
+export async function countReviews(id: string) {
+  try {
+    const reviews = await Review.countDocuments({ movieId: id });
+    return reviews;
+  } catch (error) {
+    throw new Error('Failed to find reviews with id');
   }
 }
