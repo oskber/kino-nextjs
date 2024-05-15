@@ -1,7 +1,6 @@
 import { fetchMovie, countReviews } from '../../lib/data';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { Tmovie } from '../../lib/types';
-import { fetchMovie } from "../../lib/data";
 import Image from "next/image";
 
 export default async function Movie({ id }: { id: string }) {
