@@ -1,4 +1,4 @@
-name: Prettier Formatting
+name: Formatting and Linting
 
 on:
   push:
@@ -12,13 +12,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v4
+
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -27,3 +24,6 @@ jobs:
 
       - name: Run Prettier
         run: npx prettier --write '**/*.{tsx,ts,css,md,json}'
+
+      - name: Run ESLint
+        run: npm run lint
