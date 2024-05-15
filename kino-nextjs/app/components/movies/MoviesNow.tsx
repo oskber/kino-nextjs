@@ -1,5 +1,6 @@
 import { fetchMoviesNow } from '../../lib/data';
 import MovieButton from './MovieButton';
+import Image from 'next/image';
 
 export default async function MoviesNow() {
   const movies = await fetchMoviesNow();
@@ -16,7 +17,9 @@ export default async function MoviesNow() {
             className='flex flex-col flex-shrink-0 max-w-56 justify-between bg-gray-800 bg-opacity-70 rounded-md'
           >
             <div>
-              <img
+              <Image
+              width={320}
+              height={320}
                 src={`${movie.Poster}`}
                 alt='Movie image'
                 className='object-cover lg:max-h-80 w-full'
