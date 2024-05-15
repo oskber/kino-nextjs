@@ -1,15 +1,15 @@
-'use server';
+"use server";
 
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import { redirect } from 'next/navigation';
-import { State } from '../lib/definitions';
-import { userModel } from './schema';
-import { signIn, auth, signOut } from '../../auth';
-import { AuthError } from 'next-auth';
-import { MongoError } from 'mongodb';
-import { Review } from './schema';
-import { revalidatePath } from 'next/cache';
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
+import { State } from "../lib/definitions";
+import { userModel, Screening, Review } from "./schema";
+import { signIn, auth, signOut } from "../../auth";
+import { AuthError } from "next-auth";
+import { MongoError } from "mongodb";
+import { revalidatePath } from "next/cache";
+import { booking } from "./types";
 
 export async function createUser(
   prevState: State | undefined,
@@ -23,7 +23,7 @@ export async function createUser(
     const hashedPassword =
       password.toString().length > 5
         ? await bcrypt.hash(password.toString(), 10)
-        : '';
+        : "";
     const user = new userModel({
       name,
       lastname,
@@ -36,17 +36,17 @@ export async function createUser(
     success = true; // Redirect can't be called in a try block so used boolean to check if user was created successfully
   } catch (error) {
     const errors: Array<string> = [];
-    if (!passwordsMatch) errors.push('Lösenorden matchar inte');
+    if (!passwordsMatch) errors.push("Lösenorden matchar inte");
     if (error instanceof mongoose.Error.ValidationError) {
       for (const field in error.errors) {
         errors.push(error.errors[field].message);
       }
     } else if (error instanceof MongoError && error.code === 11000) {
-      errors.push('E-postadressen är redan registrerad.');
+      errors.push("E-postadressen är redan registrerad.");
     }
     return { ...prevState, errors };
   }
-  if (success) redirect('/login');
+  if (success) redirect("/login");
 }
 
 export async function authenticate(
@@ -56,16 +56,16 @@ export async function authenticate(
   try {
     const { email, password } = Object.fromEntries(formData);
     if (!email || !password) {
-      return 'Fyll i e-postadress och lösenord.';
+      return "Fyll i e-postadress och lösenord.";
     }
-    await signIn('credentials', formData);
+    await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Felaktig e-postaddress eller lösenord.';
+        case "CredentialsSignin":
+          return "Felaktig e-postaddress eller lösenord.";
         default:
-          return 'Något gick fel.';
+          return "Något gick fel.";
       }
     }
     throw error;
@@ -82,22 +82,45 @@ export const addReview = async (
   movieId: String,
   rating: number
 ) => {
-  const name = formData.get('name');
-  const comment = formData.get('comment');
+  const name = formData.get("name");
+  const comment = formData.get("comment");
 
   const review = new Review({ name, comment, movieId, rating });
 
   try {
     await review.save();
-    console.log('Review added');
+    console.log("Review added");
   } catch (error) {
-    console.error('Failed to add review', error);
+    console.error("Failed to add review", error);
   }
 
-  revalidatePath('/');
+  revalidatePath("/");
 };
 
 export async function logout() {
   await signOut();
 }
 
+export async function createBooking(booking: booking, screeningId: string) {
+  try {
+    const screening = await Screening.findById(screeningId);
+    const seatMatrix = screening.Seats;
+
+    booking.Seats.forEach((seat) => {
+      seatMatrix[seat[1]][seat[0]] = 1;
+    });
+
+    await Screening.findOneAndUpdate(
+      { _id: screeningId },
+      { Seats: seatMatrix }
+    );
+    await Screening.findOneAndUpdate(
+      { _id: screeningId },
+      { $push: { Bookings: booking } }
+    );
+    console.log("Booking successfull!");
+  } catch (error) {
+    console.error("Error creating booking:", error);
+    throw new Error("Failed to create booking");
+  }
+}
