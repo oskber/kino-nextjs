@@ -3,22 +3,22 @@ import { TrophyIcon } from '@heroicons/react/24/outline';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import ProfilePageButton from './ProfileCtaButton';
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
-import { getUser } from '../../lib/actions';
 import { useState, useEffect } from 'react';
 import { User } from 'next-auth';
 
-
-export default function ProfilePage() {
-  const [user, setUser] = useState<User | undefined>();
+export default function ProfilePage({ userData }: { userData: User }) {
+ 
   
-  useEffect(() => {
-    async function fetchUser() {
-      const userData = await getUser();
-      setUser(userData);
-    }
-    fetchUser();
-  }, []);
+  useEffect(() =>{
+    function setCurrentUser(){
+      const currentUser = userData;
+     setUser(currentUser)
 
+    }
+    setCurrentUser()
+  })
+  
+  const [user, setUser] = useState<User | undefined>();
   const [showBonusElement, setShowBonus] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -47,15 +47,15 @@ export default function ProfilePage() {
             <li className='flex flex-row'>
               Mail:
               {`${user?.email}`}
-              <PencilSquareIcon className='h-6 w-6 text-gray-500' />
+              <PencilSquareIcon height={6} width={6} className='h-6 w-6 text-gray-500' />
             </li>
             <li className='flex flex-row'>
               Telefonnummer:
-              <PencilSquareIcon className='h-6 w-6 text-gray-500' />
+              <PencilSquareIcon height={6} width={6} className='h-6 w-6 text-gray-500' />
             </li>
             <li className='flex flex-row'>
               Kreditkort:
-              <PencilSquareIcon className='h-6 w-6 text-gray-500' />
+              <PencilSquareIcon height={6} width={6} className='h-6 w-6 text-gray-500' />
             </li>
           </ul>
         </div>

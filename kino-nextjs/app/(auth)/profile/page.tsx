@@ -28,7 +28,8 @@ export default async function Page({
           </p>
         </div>
       </section>
-      <ProfilePage />
+      {user && <ProfilePage userData={user} />}
+     
     </main>
   );
 }
