@@ -2,6 +2,7 @@ import MovieButton from '../../movies/MovieButton';
 import { searchMoviesNow } from '../../../lib/data';
 import SearchMovies from './SearchInput';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function SearchModal({ query }: { query: string }) {
   const movies = query.length > 2 ? await searchMoviesNow(query) : [];
@@ -18,7 +19,10 @@ export default async function SearchModal({ query }: { query: string }) {
                 key={`${movie._id}`}
               >
                 <div className='flex flex-row text-sm shadow-xl hover:bg-blue-200'>
-                  <img
+                  <Image
+                  height={56}
+                  width={56}
+                  
                     src={`${movie.Poster}`}
                     alt={`${movie.Title}`}
                     className='w-14'

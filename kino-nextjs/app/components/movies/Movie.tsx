@@ -1,13 +1,16 @@
 import { fetchMovie } from "../../lib/data";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Tmovie } from "../../lib/types";
+import Image from "next/image";
 
 export default async function Movie({ id }: { id: string }) {
     const movie: Tmovie = await fetchMovie(id);
     return (
         <>
             <section className='grid grid-cols-6 align-middle items-center justify-center max-w-7xl'>
-                <img
+                <Image
+                width={320}
+                height={320}
                     className='col-start-2 col-span-4 row-start-1 self-start max-w-96  sm:col-start-4 sm:col-span-2 justify-self-stretch'
                     src={movie?.Poster}
                     alt='Movie poster'
