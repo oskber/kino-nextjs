@@ -18,11 +18,12 @@ export default async function MoviesNow() {
           >
             <div>
               <Image
-              width={320}
+              width={400}
               height={320}
                 src={`${movie.Poster}`}
                 alt='Movie image'
-                className='object-cover lg:max-h-80 w-full'
+                style={{width: "400" , height: "320"}}
+                 className='object-cover rounded-t-md lg:max-h-80'
               />
               <h2 className='ml-3 mr-3 mt-2 text-[1rem] font-bold text-white text-wrap'>
                 {movie.Title}

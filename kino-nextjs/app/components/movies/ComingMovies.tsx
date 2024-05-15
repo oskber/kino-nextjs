@@ -19,11 +19,11 @@ export default async function ComingMovies() {
           >
             <div>
               <Image
-              height={320}
-              width={320}
-                src={movie.Poster}
-                alt='Movie image'
-                className='object-cover lg:max-h-80 w-full rounded-t-md'
+                 width={320}
+                 height={320}
+                   src={`${movie.Poster}`}
+                   alt='Movie image'
+                   style={{width: "400", height: "auto"}}
               />
               <h2 className='ml-3 mr-3 mt-2 text-[1rem] font-bold text-wrap text-white'>
                 {movie.Title}
