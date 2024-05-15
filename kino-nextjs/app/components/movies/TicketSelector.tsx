@@ -3,7 +3,7 @@ import React from "react";
 import { useTickets } from "app/contexts/TicketContext";
 
 const TicketSelector = () => {
-  const { tickets, incrementTicket, decrementTicket } = useTickets();
+  const { tickets, incrementTicket, decrementTicket, totalPrice } = useTickets();
 
   const renderTicketSelector = (
     type: keyof typeof tickets,
@@ -38,6 +38,11 @@ const TicketSelector = () => {
       {renderTicketSelector("adult", "Ordinarie", "125 Kr")}
       {renderTicketSelector("senior", "Senior", "100 Kr")}
       {renderTicketSelector("child", "Barn", "75 Kr")}
+      <div>
+        <p className='flex justify-center mt-4 text-white'>
+          Totalt pris: {totalPrice} kr
+        </p>
+      </div>
     </div>
   );
 };

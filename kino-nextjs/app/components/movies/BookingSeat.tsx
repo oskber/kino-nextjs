@@ -97,11 +97,6 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
           Ångra
         </button>
       </div>
-      <div>
-        <p className='flex justify-center mt-4 text-white'>
-          Totalt pris: {totalPrice} kr
-        </p>
-      </div>
     </div>
   );
 };
