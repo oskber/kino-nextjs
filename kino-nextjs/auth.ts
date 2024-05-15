@@ -1,12 +1,12 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
-import type { User } from './app/lib/definitions';
+import type { DbUser } from './app/lib/definitions';
 import bcrypt from 'bcrypt';
 import { userModel } from './app/lib/schema';
 import 'dotenv/config';
 
-async function getUserByEmail(email: string): Promise<User | undefined> {
+async function getUserByEmail(email: string): Promise<DbUser | undefined> {
     try {
         const user = await userModel.findOne({ email });
         return user;
