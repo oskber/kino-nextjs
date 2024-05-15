@@ -1,6 +1,7 @@
 //Here we will put all bigger types and import the into different componenets
 
 export type Tmovie = {
+
   _id: string;
   Title: string;
   Released: boolean;
@@ -10,6 +11,7 @@ export type Tmovie = {
   Description: string;
   Poster: string;
   __v: number;
+
 };
 
 export type Movies = Tmovie[];

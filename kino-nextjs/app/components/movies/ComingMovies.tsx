@@ -1,7 +1,6 @@
 import { fetchComingMovies } from '../../lib/data';
 import MovieButton from './MovieButton';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default async function ComingMovies() {
   const comingMovies = await fetchComingMovies();
