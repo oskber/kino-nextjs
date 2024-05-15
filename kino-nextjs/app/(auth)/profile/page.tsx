@@ -24,7 +24,7 @@ export default async function Page({
           </h1>
           <p className='md:max-w-sm text-sm md:text-xl self-center'>
             Här kan du se dina bokningar, rabatter, köpa presentkort och chatta
-            med Hjo's mest framgångsrika skådespelare.
+            med Hjos mest framgångsrika skådespelare.
           </p>
         </div>
       </section>

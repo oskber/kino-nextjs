@@ -28,7 +28,7 @@ export default function SearchMovies() {
       </label>
       <input
         id='searchMovies'
-        placeholder='Sök på din Bihjofilm!'
+        placeholder='Vilken film vill du se?'
         className='w-[350px] h-9 justify-self-center rounded-lg pl-2'
         onChange={(e) => {
           handleSearch(e.target.value);
