@@ -3,7 +3,8 @@ import React from "react";
 import { useTickets } from "app/contexts/TicketContext";
 
 const TicketSelector = () => {
-  const { tickets, incrementTicket, decrementTicket, totalPrice } = useTickets();
+  const { tickets, incrementTicket, decrementTicket, totalPrice } =
+    useTickets();
 
   const renderTicketSelector = (
     type: keyof typeof tickets,

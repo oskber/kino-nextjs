@@ -1,5 +1,11 @@
 "use client";
-import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface Tickets {
   adult: number;
@@ -34,7 +40,11 @@ export const TicketProvider: React.FC<{ children: ReactNode }> = ({
   const prices = { adult: 125, senior: 100, child: 75 };
 
   const calculateTotalPrice = (tickets: Tickets) => {
-    return tickets.adult * prices.adult + tickets.senior * prices.senior + tickets.child * prices.child;
+    return (
+      tickets.adult * prices.adult +
+      tickets.senior * prices.senior +
+      tickets.child * prices.child
+    );
   };
 
   useEffect(() => {
@@ -65,8 +75,8 @@ export const TicketProvider: React.FC<{ children: ReactNode }> = ({
         resetScreeningId,
         incrementTicket,
         decrementTicket,
-        totalPrice,         
-        setTotalPrice,       
+        totalPrice,
+        setTotalPrice,
       }}
     >
       {children}

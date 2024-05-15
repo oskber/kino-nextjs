@@ -36,6 +36,9 @@ export default async function Seats({
             />
           </section>
           <section className='section-grid-booking'>
+            <div className='col-start-3 col-span-3 m-4'>
+              <div className='bg-white h-0.5'></div>
+            </div>
             <div className='grid-item-booking'>
               <h1 className='text-custom_yellow text-xl text-center mt-8'>
                 Välj platser
@@ -45,15 +48,7 @@ export default async function Seats({
               </div>
               <BookingSeat screening={screening} />
             </div>
-            <div className='col-start-3 col-span-3 m-4'>
-              <div className='bg-white h-0.5'></div>
-            </div>
           </section>
-          <div className='flex justify-center mt-4 mb-8'>
-            <button className='bg-custom_yellow px-4 py-2 rounded-lg'>
-              Fortsätt till betalning
-            </button>
-          </div>
         </main>
       </TicketProvider>
     </>

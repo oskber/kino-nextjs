@@ -86,13 +86,13 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
       <div className='actions flex items-center justify-center'>
         <button
           onClick={handleBook}
-          className='px-4 py-2 mr-4 bg-custom_yellow rounded-lg'
+          className='px-4 py-2 mr-4 mb-8 bg-custom_yellow rounded-lg'
         >
           Boka
         </button>
         <button
           onClick={handleUndo}
-          className='px-4 py-2 ml-4 bg-custom_yellow rounded-lg'
+          className='px-4 py-2 ml-4 mb-8 bg-custom_yellow rounded-lg'
         >
           Ångra
         </button>
