@@ -14,12 +14,28 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
   const { tickets } = useTickets();
   const initialSeats = screening.Seats;
 
+  const getTotalSelectedTickets = () => {
+    return tickets.adult + tickets.senior + tickets.child;
+  };
+
+  const getSelectedSeatsCount = () => {
+    return seats.flat().filter((seat) => seat === 2).length;
+  };
+
   const toggleSeat = (rowIndex: number, seatIndex: number) => {
     setSeats((prevSeats) =>
       prevSeats.map((row, rIndex) =>
         rIndex === rowIndex
           ? row.map((seat, sIndex) =>
-              sIndex === seatIndex ? (seat === 0 ? 2 : 0) : seat
+              sIndex === seatIndex
+                ? seat === 0
+                  ? getSelectedSeatsCount() < getTotalSelectedTickets()
+                    ? 2
+                    : seat
+                  : seat === 2
+                  ? 0
+                  : seat
+                : seat
             )
           : row
       )
@@ -77,7 +93,7 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
                   seat === 0 ? "available" : seat === 1 ? "booked" : "selected"
                 }`}
               >
-                {rowIndex + 1}
+                {seatIndex + 1}
               </button>
             ))}
           </div>
