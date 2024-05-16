@@ -28,12 +28,12 @@ export default async function SearchDropdown({ query }: { query: string }) {
               >
                 <div className='flex flex-row text-sm shadow-xl hover:bg-blue-200'>
                   <Image
-                  height={56}
-                  width={56}
-                  
+                    height={56}
+                    width={56}
+                    style={{ width: 'auto', height: 'auto' }}
                     src={`${movie.Poster}`}
                     alt={`${movie.Title}`}
-                    className='w-14'
+                    className=''
                   />
                   <div className='text-sm'>
                     <p>{movie.Title}</p>

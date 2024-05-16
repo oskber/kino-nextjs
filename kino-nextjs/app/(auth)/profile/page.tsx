@@ -20,7 +20,8 @@ export default async function Page({
 
         <div className='text-white text-center flex flex-col gap-1'>
           <h1 className='text-2xl md:text-4xl'>
-            Välkommen {`${user?.name}`} till din personliga BiHjografsida
+            Välkommen {`${user?.name || 'gäst'} `} till din personliga
+            BiHjografsida
           </h1>
           <p className='md:max-w-sm text-sm md:text-xl self-center'>
             Här kan du se dina bokningar, rabatter, köpa presentkort och chatta
@@ -28,7 +29,16 @@ export default async function Page({
           </p>
         </div>
       </section>
-      <ProfilePage />
+      {user ? (
+        <ProfilePage userData={user} />
+      ) : (
+        <section className='text-red-700 text-2xl flex justify-center border-t-2 border-custom_yellow mt-5 animate-bounce'>
+          <p>
+            Kunde inte ladda dina uppgifter. Prova att Uppdatera sidan. status
+            500.
+          </p>
+        </section>
+      )}
     </main>
   );
 }
