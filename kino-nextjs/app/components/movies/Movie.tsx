@@ -10,8 +10,8 @@ export default async function Movie({ id }: { id: string }) {
     <>
       <section className='grid grid-cols-6 align-middle items-center justify-center max-w-7xl'>
         <Image
-          width={320}
-          height={320}
+          width={400}
+          height={350}
           style={{ width: '500' }}
           className='col-start-2 col-span-4 row-start-1 self-start sm:col-start-4 sm:col-span-2'
           src={movie?.Poster}
