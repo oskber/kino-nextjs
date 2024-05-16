@@ -8,7 +8,7 @@ export default async function Movie({ id }: { id: string }) {
         <>
             <section className='grid grid-cols-6 align-middle items-center justify-center max-w-7xl'>
                 <img
-                    className='col-start-2 col-span-4 row-start-1 self-start max-w-96  sm:col-start-4 sm:col-span-2 justify-self-stretch'
+                    className='col-start-1 col-span-4 row-start-1 self-start max-w-96  sm:col-start-4 sm:col-span-2 justify-self-stretch'
                     src={movie?.Poster}
                     alt='Movie poster'
                 />

@@ -40,7 +40,9 @@ export default async function Screenings({
                   href={{
                     pathname: `${id}/seats`,
                     query: JSON.parse(JSON.stringify(screening._id)),
-                  }}>
+                  }}
+                  data-cy='screening_button'
+                  >
                   Boka
                 </Link>
               </div>

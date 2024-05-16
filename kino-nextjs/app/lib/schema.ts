@@ -34,18 +34,11 @@ const movieSchema = new mongoose.Schema({
 
 const Movie = mongoose.models?.Movie || mongoose.model("Movie", movieSchema);
 
-const bookings = new mongoose.Schema({
-    Seats: { type: [[Number]], required: true },
-    Price: { type: String, required: true },
-    Email: { type: String, required: true },
-    Date: { type: String, required: true },
-});
-
 const screeningSchema = new mongoose.Schema({
-    Movie: { type: String, required: true },
+    MovieId: { type: String, required: true },
     Date: { type: String, required: true },
-    Seats: {type: [[Number]], required: true},
-    Bookings: { type: [bookings], required: true },
+    Seats: {type: Array, required: true},
+    Bookings: { type: Array, required: true },
 });
 
 const Screening = mongoose.models?.Screening || mongoose.model("Screening", screeningSchema);
