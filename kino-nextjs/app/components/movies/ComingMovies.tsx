@@ -1,7 +1,6 @@
 import { fetchComingMovies } from '../../lib/data';
 import MovieButton from './MovieButton';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default async function ComingMovies() {
   const comingMovies = await fetchComingMovies();
@@ -19,10 +18,13 @@ export default async function ComingMovies() {
             className='flex flex-col flex-shrink-0 max-w-56 justify-between bg-gray-800 bg-opacity-70 rounded-md'
           >
             <div>
-              <img
-                src={movie.Poster}
+              <Image
+                width={400}
+                height={320}
+                src={`${movie.Poster}`}
                 alt='Movie image'
-                className='object-cover lg:max-h-80 w-full rounded-t-md'
+                style={{ width: '400', height: '320' }}
+                className='object-cover rounded-t-md'
               />
               <h2 className='ml-3 mr-3 mt-2 text-[1rem] font-bold text-wrap text-white'>
                 {movie.Title}

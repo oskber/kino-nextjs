@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { screening } from '../../lib/types';
-import DateSelect from '../DateSelect';
-import { fetchFilteredScreenings } from '../../lib/data';
+import Link from "next/link";
+import { screening } from "../../lib/types";
+import DateSelect from "../DateSelect";
+import { fetchFilteredScreenings } from "../../lib/data";
 
 export default async function Screenings({
   id,
@@ -39,8 +39,11 @@ export default async function Screenings({
                   className='bg-custom_yellow font-bold py-1 px-4 rounded-sm ml-10 hover:bg-amber-500'
                   href={{
                     pathname: `${id}/seats`,
-                    query: JSON.parse(JSON.stringify(screening._id)),
-                  }}>
+                    query: {
+                      screeningId: JSON.parse(JSON.stringify(screening._id)),
+                    },
+                  }}
+                >
                   Boka
                 </Link>
               </div>
