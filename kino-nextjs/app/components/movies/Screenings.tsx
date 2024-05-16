@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { screening } from '../../lib/types';
-import DateSelect from '../DateSelect';
-import { fetchFilteredScreenings } from '../../lib/data';
+import Link from "next/link";
+import { screening } from "../../lib/types";
+import DateSelect from "../DateSelect";
+import { fetchFilteredScreenings } from "../../lib/data";
 
 export default async function Screenings({
   id,
