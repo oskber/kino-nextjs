@@ -1,6 +1,6 @@
-import { Tmovie, Movies, screening } from "./types";
-import { Movie, Review, Screening } from "./schema";
-import mongoose from "mongoose";
+import { Movies, screening } from './types';
+import { Movie, Review, Screening } from './schema';
+import mongoose from 'mongoose';
 
 //Here we will fetch all the different data from database when it is set up
 
@@ -95,5 +95,14 @@ export async function fetchScreening(screeningId: string) {
   } catch (error) {
     console.error("Error fetching seat matrix:", error);
     throw new Error("Failed to fetch seat matrix");
+  }
+}
+
+export async function countReviews(id: string) {
+  try {
+    const reviews = await Review.countDocuments({ movieId: id });
+    return reviews;
+  } catch (error) {
+    throw new Error('Failed to find reviews with id');
   }
 }

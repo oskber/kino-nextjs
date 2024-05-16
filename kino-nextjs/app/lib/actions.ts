@@ -1,15 +1,15 @@
 "use server";
 
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import { redirect } from "next/navigation";
-import { State } from "../lib/definitions";
-import { userModel, Screening, Review } from "./schema";
-import { signIn, auth, signOut } from "../../auth";
-import { AuthError } from "next-auth";
-import { MongoError } from "mongodb";
-import { revalidatePath } from "next/cache";
-import { booking } from "./types";
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import { redirect } from 'next/navigation';
+import { State } from '../lib/definitions';
+import { userModel, Screening, Review, Movie } from './schema';
+import { signIn, auth, signOut } from '../../auth';
+import { AuthError } from 'next-auth';
+import { MongoError } from 'mongodb';
+import { revalidatePath } from 'next/cache';
+import { booking } from './types';
 
 export async function createUser(
   prevState: State | undefined,
@@ -89,7 +89,9 @@ export const addReview = async (
 
   try {
     await review.save();
-    console.log("Review added");
+    console.log('Review added');
+
+    updateMovieRating(movieId);
   } catch (error) {
     console.error("Failed to add review", error);
   }
@@ -100,6 +102,17 @@ export const addReview = async (
 export async function logout() {
   await signOut();
 }
+
+async function updateMovieRating(id: String) {
+  const reviews = await Review.find({ movieId: id });
+  let ratingSum = 0;
+  reviews.forEach((review) => {
+    ratingSum += review.rating;
+  });
+  const averageRating = Math.round((ratingSum / reviews.length) * 10) / 10;
+  await Movie.findOneAndUpdate({ _id: id }, { Rating: averageRating });
+}
+
 
 export async function createBooking(booking: booking, screeningId: string) {
   try {
