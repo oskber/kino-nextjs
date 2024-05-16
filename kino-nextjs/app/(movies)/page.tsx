@@ -2,6 +2,8 @@ import MoviesNow from '../components/movies/MoviesNow';
 import ComingMovies from '../components/movies/ComingMovies';
 import { Metadata } from 'next';
 import SearchDropdown from '../components/navigation/SearchBar/SearchDropdown';
+import { Suspense } from 'react';
+import { Skeleton } from 'app/components/skeletons';
 
 export const metadata: Metadata = {
   title: 'Startsida',
@@ -16,8 +18,12 @@ export default function Page({
   return (
     <main className='mt-20 grid justify-center'>
       <SearchDropdown query={query} />
-      <MoviesNow />
-      <ComingMovies />
+      <Suspense fallback={<Skeleton />}>
+        <MoviesNow />
+      </Suspense>
+      <Suspense fallback={<Skeleton />}>
+        <ComingMovies />
+      </Suspense>
     </main>
   );
 }
