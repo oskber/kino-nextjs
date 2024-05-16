@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useTickets } from "../../contexts/TicketContext";
 import { createBooking } from "../../lib/actions";
 import { screening, booking } from "../../lib/types";
+import Link from 'next/link';
+import { useParams } from "next/navigation";
 
 interface BookingSeatProps {
   screening: screening;
@@ -13,6 +15,8 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const { tickets } = useTickets();
   const initialSeats = screening.Seats;
+  const params = useParams();
+  const {id} = params;
 
   const getTotalSelectedTickets = () => {
     return tickets.adult + tickets.senior + tickets.child;
@@ -62,10 +66,11 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
       Email: "user@mail.se",
       Date: screening.Date,
     };
+    
+    console.log(reservation);
 
     await createBooking(reservation, screening._id);
 
-    console.log(reservation);
     setTotalPrice(totalPrice);
   };
 
@@ -100,12 +105,12 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
         ))}
       </div>
       <div className='actions flex items-center justify-center'>
-        <button
-          onClick={handleBook}
-          className='px-4 py-2 mr-4 mb-8 bg-custom_yellow rounded-lg'
-        >
+        <Link onClick={handleBook} 
+          className='px-4 py-2 mr-4 mb-8 bg-custom_yellow rounded-lg cursor-pointer' 
+          href={`/${id}/seats/confirmation`}>
           Boka
-        </button>
+        </Link>
+
         <button
           onClick={handleUndo}
           className='px-4 py-2 ml-4 mb-8 bg-custom_yellow rounded-lg'
