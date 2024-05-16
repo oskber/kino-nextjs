@@ -1,7 +1,7 @@
 import { fetchMovie, countReviews } from '../../lib/data';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { Tmovie } from '../../lib/types';
-import Image from "next/image";
+import Image from 'next/image';
 
 export default async function Movie({ id }: { id: string }) {
   const movie: Tmovie = await fetchMovie(id);
@@ -9,22 +9,24 @@ export default async function Movie({ id }: { id: string }) {
   return (
     <>
       <section className='grid grid-cols-6 align-middle items-center justify-center max-w-7xl'>
-      <Image
-                width={320}
-                height={320}
-                    className='col-start-2 col-span-4 row-start-1 self-start max-w-96  sm:col-start-4 sm:col-span-2 justify-self-stretch'
-                    src={movie?.Poster}
-                    alt='Movie poster'
-                />
+        <Image
+          width={320}
+          height={320}
+          style={{ width: '500' }}
+          className='col-start-2 col-span-4 row-start-1 self-start sm:col-start-4 sm:col-span-2'
+          src={movie?.Poster}
+          alt='Movie poster'
+        />
         <div className='mt-8 row-start-2 col-start-2 col-span-4 self-start justify-self-center flex flex-col sm:row-start-1 sm:col-start-2 sm:col-span-2 sm:mr-9'>
           <h2 className='text-2xl lg:text-3xl mb-3 font-bold'>{movie.Title}</h2>
           {reviewCount < 5 && (
-            <p className='mb-3'>
-              <div className=' bg-yellow-500 text-black text-xs font-black rounded-sm w-fit p-[0.10rem] inline-block align-middle'>
-                IMDb
-              </div>{' '}
+            <div className='mb-3'>
+              <p className=' bg-yellow-500 text-black text-xs font-black rounded-sm w-fit p-[0.10rem] inline-block align-middle mr-1'>
+                {' '}
+                IMDB
+              </p>
               {movie.imdbRating}
-            </p>
+            </div>
           )}
           {reviewCount >= 5 && (
             <p>
