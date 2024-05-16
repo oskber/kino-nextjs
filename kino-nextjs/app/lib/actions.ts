@@ -107,7 +107,7 @@ export async function createBooking(booking: booking, screeningId: string) {
     const seatMatrix = screening.Seats;
 
     booking.Seats.forEach((seat) => {
-      seatMatrix[seat[1]][seat[0]] = 1;
+      seatMatrix[seat[0]][seat[1]] = 1;
     });
 
     await Screening.findOneAndUpdate(

@@ -90,6 +90,7 @@ export async function fetchScreening(screeningId: string) {
   try {
     const screening = await Screening.findById(screeningId);
     const data = JSON.parse(JSON.stringify(screening));
+
     return data ? data : [];
   } catch (error) {
     console.error("Error fetching seat matrix:", error);
