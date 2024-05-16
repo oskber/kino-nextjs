@@ -1,12 +1,12 @@
-import MoviesNow from "../components/movies/MoviesNow";
-import ComingMovies from "../components/movies/ComingMovies";
-import { Metadata } from "next";
-import SearchDropdown from "../components/navigation/SearchBar/SearchDropdown";
-import { Suspense } from "react";
-import { Skeleton } from "app/components/skeletons";
+import MoviesNow from '../components/movies/MoviesNow';
+import ComingMovies from '../components/movies/ComingMovies';
+import { Metadata } from 'next';
+import SearchDropdown from '../components/navigation/SearchBar/SearchDropdown';
+import { Suspense } from 'react';
+import { Skeleton } from 'app/components/skeletons';
 
 export const metadata: Metadata = {
-  title: "Startsida",
+  title: 'Startsida',
 };
 
 export default function Page({
@@ -14,9 +14,9 @@ export default function Page({
 }: {
   searchParams?: { query?: string };
 }) {
-  const query = searchParams?.query || "";
+  const query = searchParams?.query || '';
   return (
-    <main className="mt-20 grid justify-center">
+    <main className='mt-20 grid justify-center'>
       <SearchDropdown query={query} />
       <Suspense fallback={<Skeleton />}>
         <MoviesNow />
