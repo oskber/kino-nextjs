@@ -19,9 +19,17 @@ export default function SearchMovies() {
   }, 600);
   return (
     <>
+      <label
+        htmlFor='searchMovies'
+        className='flex flex-row gap-1 text-custom_yellow self-center md:self-start'
+      >
+        Sök på din Bihjofilm!
+        <MagnifyingGlassIcon className='w-5 h-5' />
+      </label>
       <input
-        placeholder='Sök på din Bihjofilm!'
-        className='w-[350px] h-9 justify-self-center rounded-t-lg pl-2'
+        id='searchMovies'
+        placeholder='Vilken film vill du se?'
+        className='w-[350px] h-9 justify-self-center rounded-lg pl-2'
         onChange={(e) => {
           handleSearch(e.target.value);
         }}

@@ -11,7 +11,7 @@ export const authConfig = {
       if (isOnProfilePage) {
         if (isLoggedIn) return true;
         return false; 
-      } else if (isLoggedIn && nextUrl.pathname === '/login') {
+      } else if (isLoggedIn && (nextUrl.pathname === '/login' || nextUrl.pathname === '/register')) {
         return Response.redirect(new URL('/profile', nextUrl));
       }
       return true;
