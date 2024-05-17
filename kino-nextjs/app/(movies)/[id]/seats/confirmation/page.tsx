@@ -14,7 +14,7 @@ export default async function Page({
       <div className='mb-5 '>
         <h1 className='text-2xl lg:text-3xl text-center font-bold '>
           <CheckIcon className='h-24 w-24 text-black m-auto bg-green-700 rounded-full' />
-          Tack för ditt biljettköp!
+          Tack för ditt bokning!
         </h1>
         <p className='text-center mt-3'>
           En bokningsbekräftelse har skickats till din e-postadress.
