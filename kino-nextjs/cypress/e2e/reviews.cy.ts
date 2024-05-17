@@ -12,7 +12,9 @@ describe('clicks on a movie and adds a review', () => {
     cy.get('[data-cy="comment-input"]').type('success-1122334455');
     cy.get(':nth-child(3) > [data-cy="rating"]').click();
     cy.get('[data-cy="review-submit-button"]').click();
-    cy.get('[data-cy="review-list"]').contains('success-1122334455');
+    cy.task('findReview', 'success-1122334455').then((review) => {
+      assert(review, 'Review not found in the database');
+    });
   });
   describe('removes review from database and updates page', () => {
     it('removes review from database and updates page', () => {

@@ -21,11 +21,18 @@ export default defineConfig({
 
           return result;
         },
+        async findReview(comment: string) {
+          const URL: string = process.env.DB_URL as string;
+          await mongoose.connect(URL).catch((error) => {
+            throw new Error(error);
+          });
+          const review = await Review.findOne({ comment });
+          await mongoose.connection.close();
+
+          return review;
+        },
       });
     },
     testIsolation: false,
   },
 });
-
-//connect to db
-//remove comment containing success-1122334455 if possible after test is run.
