@@ -1,14 +1,15 @@
-"use client";
-import React from "react";
-import { useTickets } from "app/contexts/TicketContext";
+'use client';
+import React from 'react';
+import { useTickets } from 'app/contexts/TicketContext';
 
 const TicketSelector = () => {
-  const { tickets, incrementTicket, decrementTicket, totalPrice } = useTickets();
+  const { tickets, incrementTicket, decrementTicket, totalPrice } =
+    useTickets();
 
   const renderTicketSelector = (
     type: keyof typeof tickets,
     label: string,
-    price: string
+    price: string,
   ) => {
     return (
       <div className="grid grid-cols-12 items-center my-2">
@@ -41,9 +42,9 @@ const TicketSelector = () => {
     <div className="w-full max-w-md p-4 text-white mx-auto">
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12">
-          {renderTicketSelector("adult", "Ordinarie", "125 Kr")}
-          {renderTicketSelector("senior", "Senior", "100 Kr")}
-          {renderTicketSelector("child", "Barn", "75 Kr")}
+          {renderTicketSelector('adult', 'Ordinarie', '125 Kr')}
+          {renderTicketSelector('senior', 'Senior', '100 Kr')}
+          {renderTicketSelector('child', 'Barn', '75 Kr')}
         </div>
         <div className="col-span-12 mt-4 text-center">
           Totalt pris: {totalPrice} kr
