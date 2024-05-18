@@ -30,7 +30,6 @@ export default defineConfig({
   },
 });
 
-
 const populateScreening = async () => {
   const URL: string = process.env.DB_URL as string;
 
