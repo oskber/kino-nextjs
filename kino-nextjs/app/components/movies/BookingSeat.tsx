@@ -120,9 +120,9 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
 
   return (
     <div>
-      <div className="seat-chart">
+      <div className="seat-chart" data-cy="seatChart">
         {seats.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center">
+          <div key={rowIndex} className="flex justify-center" data-cy="seatRow">
             {row.map((seat, seatIndex) => (
               <button
                 key={`${rowIndex}-${seatIndex}`}
@@ -131,6 +131,7 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
                 className={`seat ${
                   seat === 0 ? 'available' : seat === 1 ? 'booked' : 'selected'
                 }`}
+                data-cy={`${rowIndex}-${seatIndex}`}
               >
                 {seatIndex + 1}
               </button>
@@ -153,24 +154,27 @@ const BookingSeat: React.FC<BookingSeatProps> = ({ screening }) => {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          data-cy="emailInput"
         />
       </div>
       <div className="actions flex items-center justify-center">
         <a
           onClick={handleBook}
           className="px-4 py-2 mr-4 mb-8 bg-custom_yellow rounded-lg cursor-pointer"
+          data-cy="bookingButton"
         >
           Boka
         </a>
         <button
           onClick={handleUndo}
           className="px-4 py-2 ml-4 mb-8 bg-custom_yellow rounded-lg"
+          data-cy="undoButton"
         >
           Ångra
         </button>
       </div>
       {errorMessage && (
-        <div className="bg-red-500 text-white p-2 mb-4 rounded">
+        <div className="bg-red-500 text-white p-2 mb-4 rounded" data-cy="errorMessage">
           {errorMessage}
         </div>
       )}

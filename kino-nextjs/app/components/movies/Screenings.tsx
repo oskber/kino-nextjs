@@ -39,7 +39,9 @@ export default async function Screenings({
                   className='bg-custom_yellow font-bold py-1 px-4 rounded-sm ml-10 hover:bg-amber-500'
                   href={{
                     pathname: `${id}/seats`,
-                    query: JSON.parse(JSON.stringify(screening._id)),
+                    query: {
+                      screeningId: JSON.parse(JSON.stringify(screening._id))
+                    },
                   }}
                   data-cy='screening_button'
                   >
