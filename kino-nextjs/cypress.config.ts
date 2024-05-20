@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 import mongoose from 'mongoose';
 import { Review, Screening } from '../kino-nextjs/app/lib/schema';
 import dotenv from 'dotenv';
+import { screening } from 'app/lib/types';
 
 dotenv.config({ path: '.env.test' });
 
@@ -21,16 +22,27 @@ export default defineConfig({
 
           return result;
         },
-      });
+        async findReview(comment: string) {
+          const URL: string = process.env.DB_URL as string;
+          await mongoose.connect(URL).catch((error) => {
+            throw new Error(error);
+          });
+          const review = await Review.findOne({ comment });
+          await mongoose.connection.close();
 
-      on('task', {populateScreening});
-
+          return review;
+        },
+        populateScreening,
+        validateScreening,
+        removeScreening,
+      })
     },
     testIsolation: false,
   },
 });
 
-const populateScreening = async () => {
+
+const populateScreening= async () => {
   const URL: string = process.env.DB_URL as string;
 
   await mongoose.connect(URL).catch((error) => {
@@ -51,17 +63,38 @@ const populateScreening = async () => {
         ],
       Bookings: []
     }
-
   const screeningModel = new Screening(screening)
   const data = await screeningModel.save()
   await mongoose.connection.close();
   return data
 }
 
-/*const removeScreening = async (id: string) => {
+interface IDocumentIds {
+  screeningId: string,
+  movieId: string
+}
 
-  await testScreening.findOneAndDelete({ MovieId: new mongoose.Types.ObjectId(id) })
-}*/
+const validateScreening = async ({screeningId, movieId}: {screeningId: string, movieId: string}) =>{
+  const URL: string = process.env.DB_URL as string;
+  await mongoose.connect(URL).catch((error) => {
+    throw new Error(error);
+  });
+  const screening = await Screening.findById(screeningId);
+  return screening.MovieId == movieId ? true : false
+
+}
+
+const removeScreening = async (screeningId: string) => {
+  const URL: string = process.env.DB_URL as string;
+  await mongoose.connect(URL).catch((error) => {
+    throw new Error(error);
+  });
+
+  const data = await Screening.findByIdAndDelete(screeningId)
+
+  await mongoose.connection.close();
+  return data
+}
 
 //connect to db
 //remove comment containing success-1122334455 if possible after test is run.
