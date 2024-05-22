@@ -33,7 +33,6 @@ export default defineConfig({
           return review;
         },
         populateScreening,
-        validateScreening,
         removeScreening,
       })
     },
@@ -67,21 +66,6 @@ const populateScreening= async () => {
   const data = await screeningModel.save()
   await mongoose.connection.close();
   return data
-}
-
-interface IDocumentIds {
-  screeningId: string,
-  movieId: string
-}
-
-const validateScreening = async ({screeningId, movieId}: {screeningId: string, movieId: string}) =>{
-  const URL: string = process.env.DB_URL as string;
-  await mongoose.connect(URL).catch((error) => {
-    throw new Error(error);
-  });
-  const screening = await Screening.findById(screeningId);
-  return screening.MovieId == movieId ? true : false
-
 }
 
 const removeScreening = async (screeningId: string) => {
