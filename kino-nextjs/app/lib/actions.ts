@@ -131,6 +131,7 @@ export async function createBooking(booking: booking, screeningId: string) {
       { _id: screeningId },
       { $push: { Bookings: booking } }
     );
+    revalidatePath('/')
     console.log("Booking successfull!");
   } catch (error) {
     console.error("Error creating booking:", error);
