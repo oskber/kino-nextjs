@@ -206,7 +206,6 @@ describe('Test so bookingflow works correctly', () => {
   });
 
   it('Removes testscreening from database', () => {
-      console.log(screeningId)
       cy.task('removeScreening', screeningId);
   });
 });
