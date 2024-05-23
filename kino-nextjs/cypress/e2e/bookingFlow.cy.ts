@@ -1,18 +1,20 @@
-describe('Test so screenings exist and is clickable', () => {
+
+describe('Test so bookingflow works correctly', () => {
   let movieId: string;
   let screeningId: string;
   it('Visits localhost:3000 and comes to homepage then clicks on the "Se mer"-button on the first movie.', () => {
     cy.visit('http://localhost:3000');
+    cy.reload();
     cy.get('[data-cy="movie-button"]').first().click();
   });
 
   it('Adds screening to database for movie then checks for screening on todays date and clicks on "Boka"-button', () => {
-    cy.wait(1000);
+    cy.location('pathname', {timeout: 60000})
+    .should('match', /[\w\d]+/);
     cy.location().then((loc) => {
       movieId = loc.pathname.replace('/', '');
       cy.task('populateScreening', movieId);
     });
-    cy.wait(1000);
     cy.reload();
     cy.get('[data-cy="screening_date"]').should(
       'have.value',
@@ -21,17 +23,20 @@ describe('Test so screenings exist and is clickable', () => {
     cy.get('[data-cy="screening_button"]').first().click();
   });
 
-  it('Expect to be on seats page with a screening- and movie-id', () => {
-    cy.wait(1000)
+  it('Saves screeningId for later in test', () => {
+    cy.location('pathname', {timeout: 60000})
+    .should('include', '/seats');
     cy.location().then((loc) => {
       screeningId = loc.search.split('=')[1];
-      cy.url().should(
-        'be.equal',
-        `http://localhost:3000/${movieId}/seats?screeningId=${screeningId}`,
-      );
     });
-    
-});
+  });
+
+  it('Expect to be on seats page with a screening- and movie-id', () => {
+    cy.url().should(
+      'be.equal',
+      `http://localhost:3000/${movieId}/seats?screeningId=${screeningId}`,
+    );
+  })
 
   it('Chooses one adult ticket and checks total price', () => {
     cy.get('[data-cy="totalPrice"]').contains('Totalt pris: 0 kr');
@@ -117,7 +122,7 @@ describe('Test so screenings exist and is clickable', () => {
     cy.get('[data-cy="totalPrice"]').contains('Totalt pris: 225 kr');
     cy.get('[data-cy="adultTicket__button__decrement"]').click();
     cy.get('[data-cy="seniorTicket__button__decrement"]').click();
-  })
+  });
 
   it('Chooses one adult and one child ticket and checks total price', () => {
     cy.get('[data-cy="adultTicket__button__increment"]').click();
@@ -125,7 +130,7 @@ describe('Test so screenings exist and is clickable', () => {
     cy.get('[data-cy="totalPrice"]').contains('Totalt pris: 200 kr');
     cy.get('[data-cy="adultTicket__button__decrement"]').click();
     cy.get('[data-cy="childTicket__button__decrement"]').click();
-  })
+  });
 
   it('Chooses one senior and one child ticket and checks total price', () => {
     cy.get('[data-cy="seniorTicket__button__increment"]').click();
@@ -133,7 +138,7 @@ describe('Test so screenings exist and is clickable', () => {
     cy.get('[data-cy="totalPrice"]').contains('Totalt pris: 175 kr');
     cy.get('[data-cy="seniorTicket__button__decrement"]').click();
     cy.get('[data-cy="childTicket__button__decrement"]').click();
-  })
+  });
 
   it('Tries to choose more than one seat when only having chosen one ticket.', () => {
     cy.get('[data-cy="adultTicket__button__increment"]').click();
@@ -154,6 +159,7 @@ describe('Test so screenings exist and is clickable', () => {
   });
 
   it('Tries to go forward with booking without having chosen a seat and expect to have error.', () => {
+    cy.wait(3001)
     cy.get('[data-cy="bookingButton"]').click();
     cy.get('[data-cy="errorMessage"]').should(
       'be.visible' /*'Du har inte valt samma antal platser som antal biljetter!'*/,
@@ -179,33 +185,28 @@ describe('Test so screenings exist and is clickable', () => {
   });
 
   it('Makes a correct booking and expects to go to confirmation page for correct movie.', () => {
-    /*cy.location().then((loc) => {
-      Setting screeningId to the url searchparam id for removeScreening task
-      screeningId = loc.search.split('=')[1];
-    });*/
     cy.get('[data-cy="adultTicket__button__increment"]').click();
     cy.get('[data-cy="0-0"]').click();
     cy.get('[data-cy="emailInput"]').type('testEmail@test.com');
     cy.get('[data-cy="bookingButton"]').click();
     cy.wait(1000);
-    cy.url().should(
-      'be.equal',
-      `http://localhost:3000/${movieId}/seats/confirmation`,
-    );
+      cy.url().should(
+        'be.equal',
+        `http://localhost:3000/${movieId}/seats/confirmation`,
+      );
   });
 
   it('Clicks on "Hem" in navigation to go back to starting page then go to seats again to check that the correct seat is booked.', () => {
     cy.get('[data-cy="confirmation__home"]').click();
-    /*cy.wait(1000);
-    cy.reload();*/
     cy.get('[data-cy="movie-button"]').first().click();
     cy.get('[data-cy="screening_button"]').first().click();
     cy.get('[data-cy="0-0"]')
-    .should('have.class', 'booked').should('be.disabled')
-    
-  })
+      .should('have.class', 'booked')
+      .should('be.disabled');
+  });
 
   it('Removes testscreening from database', () => {
-    cy.task('removeScreening', screeningId);
+      console.log(screeningId)
+      cy.task('removeScreening', screeningId);
   });
 });
