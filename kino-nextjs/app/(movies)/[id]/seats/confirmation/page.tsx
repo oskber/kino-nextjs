@@ -28,7 +28,6 @@ export default async function Page({
         href={{
           pathname: `/`,
         }}
-        data-cy='confirmation__home'
       >
         Hem
       </Link>

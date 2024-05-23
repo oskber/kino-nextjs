@@ -34,7 +34,7 @@ const movieSchema = new mongoose.Schema({
 const Movie = mongoose.models?.Movie || mongoose.model("Movie", movieSchema);
 
 const screeningSchema = new mongoose.Schema({
-  MovieId: { type: mongoose.Schema.Types.ObjectId, ref: "Movie", required: true},
+  Movie: { type: String, required: true },
   Date: { type: String, required: true },
   Seats: { type: Array, required: true },
   Bookings: { type: Array, required: true },

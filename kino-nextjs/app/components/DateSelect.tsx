@@ -25,7 +25,6 @@ export default function DateSelect() {
                 onChange={(e) => {
                     handleDate(e.target.value);
                 }}
-                data-cy='screening_date'
             />
         </>
     );

@@ -13,14 +13,13 @@ const TicketSelector = () => {
   ) => {
     return (
       <div className="grid grid-cols-12 items-center my-2">
-        <div className="col-span-12 sm:col-span-4 text-center sm:text-left py-3" data-cy={`${type}Ticket`}>
+        <div className="col-span-12 sm:col-span-4 text-center sm:text-left py-3">
           {label}
         </div>
         <div className="col-span-12 sm:col-span-4 flex items-center justify-center py-2">
           <button
             onClick={() => decrementTicket(type)}
             className="px-4 py-2 bg-custom_yellow rounded-lg"
-            data-cy={`${type}Ticket__button__decrement`}
           >
             -
           </button>
@@ -28,12 +27,11 @@ const TicketSelector = () => {
           <button
             onClick={() => incrementTicket(type)}
             className="px-4 py-2 bg-custom_yellow rounded-lg"
-            data-cy={`${type}Ticket__button__increment`}
           >
             +
           </button>
         </div>
-        <div className="col-span-12 sm:col-span-4 text-center sm:text-right py-3" data-cy={`${type}Ticket__price`}>
+        <div className="col-span-12 sm:col-span-4 text-center sm:text-right py-3">
           {price}
         </div>
       </div>
@@ -48,7 +46,7 @@ const TicketSelector = () => {
           {renderTicketSelector('senior', 'Senior', '100 Kr')}
           {renderTicketSelector('child', 'Barn', '75 Kr')}
         </div>
-        <div className="col-span-12 mt-4 text-center" data-cy="totalPrice">
+        <div className="col-span-12 mt-4 text-center">
           Totalt pris: {totalPrice} kr
         </div>
       </div>
