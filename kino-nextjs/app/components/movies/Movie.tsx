@@ -6,6 +6,7 @@ import Image from 'next/image';
 export default async function Movie({ id }: { id: string }) {
   const movie: Tmovie = await fetchMovie(id);
   const reviewCount = await countReviews(id);
+  const isReleased = movie.Released;
   return (
     <>
       <section className='grid grid-cols-6 align-middle items-center justify-center max-w-7xl'>
@@ -40,6 +41,16 @@ export default async function Movie({ id }: { id: string }) {
             <span className='font-normal text-white'>{` ${movie.Genre}`}</span>
           </p>
           <p className='sm:text-lg'>{movie.Description}</p>
+          {!isReleased && (
+            <>
+          <p className='mb-3 text-lg font-bold text-custom_yellow'>
+              Release Date:{' '}
+              <span className='font-normal text-white'>
+                {'2024-06-26'}
+              </span>
+            </p>
+            </>
+          )}
         </div>
       </section>
     </>
